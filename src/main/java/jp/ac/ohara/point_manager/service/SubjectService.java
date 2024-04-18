@@ -56,7 +56,7 @@ public class  SubjectService{
 	        repository.save(subject);
 	    }
 	
-	    public void deleteStudent(Long id) {
+	    public void deleteSubject(Long id) {
 	        repository.deleteById(id);
 	    }
 	}
