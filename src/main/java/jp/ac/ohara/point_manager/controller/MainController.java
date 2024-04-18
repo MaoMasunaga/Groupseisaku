@@ -22,9 +22,35 @@ public class MainController {
     @Autowired
     private StudentService studentService;
 
+<<<<<<< HEAD
     @GetMapping("/")
     public String index(Model model) {
         return "index";
+=======
+@GetMapping("/")
+  public String index(Model model) {
+    return "index";
+  }
+
+// 学生登録ページ
+@GetMapping("/setstu/")
+public ModelAndView add(StudentModel student, ModelAndView model) {
+	  model.addObject("student", student); 
+	  model.setViewName("setstu");
+	  return model;
+}
+
+//Form送信
+@PostMapping("/setstu/")
+public String student(@Validated @ModelAttribute @NonNull StudentModel student, RedirectAttributes result, ModelAndView model,
+        RedirectAttributes redirectAttributes) {
+    try {
+        this.studentService.save(student);
+        redirectAttributes.addFlashAttribute("exception", "");
+
+    } catch (Exception e) {
+        redirectAttributes.addFlashAttribute("exception", e.getMessage());
+>>>>>>> branch 'master' of https://github.com/MaoMasunaga/Groupseisaku.git
     }
 
     // 学生登録ページ
