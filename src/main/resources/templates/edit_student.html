@@ -25,8 +25,12 @@
     <select th:field="*{classNum}">
       <option th:each="classNum : ${classNumbers}" th:value="${classNum}" th:text="${classNum}" th:selected="${classNum == student.classNum}">
       </option>
-    </select>
-    <br>
+      </select>
+      <br>
+    <label>在学中:</label> 
+	<input type="checkbox" th:field="*{isAttend}">
+	<br>
+
     <button type="submit">更新する</button>
   </form>
 </body>

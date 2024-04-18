@@ -31,14 +31,17 @@ public  class StudentModel{
 	@Column(length = 3, nullable = true, name = "class_num")
 	private String classNum;
 	
-	@Column(nullable = true, name = "is_attend")
-	private  Boolean isAttend;
+    @Column(nullable = true, name = "is_attend")
+    private Boolean isAttend = true; // デフォルトで在籍中とする
 	
 	@Column(length = 3, nullable = true, name = "school_cd")
 	private String schoolCd;
+	
 
 
 	}
+
+
 	
 	
 	

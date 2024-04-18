@@ -24,7 +24,7 @@
 	        <option value="2023">2023</option>
 	        <option value="2024" selected>2024</option>
 	        <option value="2025">2025</option>
-	        <option value="2026">2025</option>
+	        <option value="2026">2026</option>
 	        <option value="2027">2027</option>
 	        <option value="2028">2028</option>
 	        <option value="2029">2029</option>
@@ -75,6 +75,8 @@
         <div th:if="${#fields.hasErrors('classNum')}" th:errors="*{classNum}" class="invalid-feedback">errors!</div>
       </div>
     </div>
+    
+    
     <div class="my-4">
       <input type="submit" class="btn btn-primary" value="送信">
       <footer class="my-5 pt-5 text-body-secondary text-center text-small">
