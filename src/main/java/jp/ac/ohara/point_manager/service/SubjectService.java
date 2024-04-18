@@ -7,7 +7,6 @@ import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
-import jp.ac.ohara.point_manager.model.StudentModel;
 import jp.ac.ohara.point_manager.model.SubjectModel;
 import jp.ac.ohara.point_manager.repository.SubjectRepository;
  
@@ -53,8 +52,8 @@ public class  SubjectService{
 	        return repository.findById(id).orElse(null);
 	    }
 	
-	    public void saveOrUpdateStudent(StudentModel student) {
-	        repository.save(student);
+	    public void saveOrUpdateSubject(SubjectModel subject) {
+	        repository.save(subject);
 	    }
 	
 	    public void deleteStudent(Long id) {
