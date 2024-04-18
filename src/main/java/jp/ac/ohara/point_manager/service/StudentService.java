@@ -21,6 +21,11 @@ public class StudentService {
         return repository.findAll();
     }
 
+	 // 学生データの保存
+	    public void save(StudentModel student) {
+	        repository.save(student);
+	    }
+    
     // 学生データの保存
     public void saveOrUpdateStudent(StudentModel student) {
         repository.save(student);
@@ -46,4 +51,5 @@ public class StudentService {
     public StudentModel getStudentById(Long id) {
         return repository.findById(id).orElse(null);
     }
+
 }
