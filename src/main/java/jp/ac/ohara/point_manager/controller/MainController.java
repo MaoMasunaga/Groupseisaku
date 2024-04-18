@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -120,23 +119,6 @@ public class MainController {
         return "redirect:/studentlist/";
     }
     
-    @GetMapping("/studentlist")
-    public String showStudentList(Model model,
-                                   @RequestParam(required = false) Integer enrollmentYear,
-                                   @RequestParam(required = false) String className,
-                                   @RequestParam(required = false) Boolean isActive) {
-        List<StudentModel> studentList;
-
-        if (enrollmentYear != null || className != null || isActive != null) {
-            // 入学年度、クラス、在学中か否かのいずれかが指定された場合は絞り込み検索を実行
-            studentList = studentService.filterStudents(enrollmentYear, className, isActive);
-        } else {
-            // 絞り込み条件が指定されていない場合はすべての学生情報を表示
-            studentList = studentService.getStudentList();
-        }
-
-        model.addAttribute("studentList", studentList);
-        return "studentlist";
-    }
+    
 
 }
