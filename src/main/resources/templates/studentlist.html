@@ -6,7 +6,23 @@
 </head>
 
 <body>
+<form th:action="@{/studentlist/search}" method="get">
+           <select name="entYear">
+    <option value="" selected>入学年度を選択</option>
+    <option th:each="year : ${years}" th:value="${year}" th:text="${year}"></option>
+</select>
 
+<select name="classNum">
+    <option value="" selected>クラス番号を選択</option>
+    <option th:each="classNumber : ${classNumbers}" th:value="${classNumber}" th:text="${classNumber}"></option>
+</select>
+
+            
+            <input type="checkbox" id="isAttend" name="isAttend" value="true">
+<label for="isAttend">在学中</label>
+
+            <button type="submit">検索</button>
+        </form>
 
     <div th:if="${studentList != null}">
        

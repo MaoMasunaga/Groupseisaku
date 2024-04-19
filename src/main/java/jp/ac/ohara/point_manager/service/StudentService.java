@@ -57,6 +57,35 @@ public class StudentService {
     public void deleteStudent(Long id) {
         repository.deleteById(id);
     }
+    
+    public List<StudentModel> searchStudents(Integer entYear, String classNum, Boolean isAttend) {
+        if (entYear != null && classNum != null && isAttend != null) {
+            // 入学年度、クラス番号、在学中か否かがすべて指定された場合
+            return repository.findByEntYearAndClassNumAndIsAttend(entYear, classNum, isAttend);
+        } else if (entYear != null && classNum != null) {
+            // 入学年度とクラス番号が指定された場合
+            return repository.findByEntYearAndClassNum(entYear, classNum);
+        } else if (entYear != null && isAttend != null) {
+            // 入学年度と在籍の有無が指定された場合
+            return repository.findByEntYearAndIsAttend(entYear, isAttend);
+        } else if (classNum != null && isAttend != null) {
+            // クラス番号と在籍の有無が指定された場合
+            return repository.findByClassNumAndIsAttend(classNum, isAttend);
+        } else if (entYear != null) {
+            // 入学年度のみが指定された場合
+            return repository.findByEntYear(entYear);
+        } else if (classNum != null) {
+            // クラス番号のみが指定された場合
+            return repository.findByClassNum(classNum);
+        } else if (isAttend != null) {
+            // 在籍の有無のみが指定された場合
+            return repository.findByIsAttend(isAttend);
+        } else {
+            // 全ての条件が指定されなかった場合、空のリストを返す
+            return repository.findAll();
+        }
+    }
+
 
    
 

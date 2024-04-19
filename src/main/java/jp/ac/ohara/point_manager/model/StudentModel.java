@@ -1,5 +1,7 @@
 package jp.ac.ohara.point_manager.model;
 
+import java.util.Objects;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -36,6 +38,30 @@ public  class StudentModel{
 	
 	@Column(length = 3, nullable = true, name = "school_cd")
 	private String schoolCd;
+	
+	@Override
+	public boolean equals(Object obj) {
+	    if (this == obj) {
+	        return true;
+	    }
+	    if (obj == null || getClass() != obj.getClass()) {
+	        return false;
+	    }
+	    StudentModel other = (StudentModel) obj;
+	    return Objects.equals(id, other.id) &&
+	           Objects.equals(no, other.no) &&
+	           Objects.equals(name, other.name) &&
+	           Objects.equals(entYear, other.entYear) &&
+	           Objects.equals(classNum, other.classNum) &&
+	           Objects.equals(isAttend, other.isAttend) &&
+	           Objects.equals(schoolCd, other.schoolCd);
+	}
+
+	@Override
+	public int hashCode() {
+	    return Objects.hash(id, no, name, entYear, classNum, isAttend, schoolCd);
+	}
+
 	
 
 
