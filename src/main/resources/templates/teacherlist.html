@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>学生管理</title>
+</head>
+
+<body>
+  <div th:if="${teacherList != null and not #lists.isEmpty(teacherList)}">
+    <table>
+      <thead>
+        <tr>
+          <th>入学年度</th>
+          <th>学生番号</th>
+          <th>学生名</th>
+          <th>クラス番号</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="teacher : ${teacherList}">
+          <td th:text="${teacher.tid}">
+          </td>
+          <td th:text="${teacher.name}">
+          </td>
+          <td th:text="${teacher.schoolCd}">
+          </td>
+          <td>
+            <form th:action="@{/teacher/delete/{tid}(id=${teacher.tid})}" method="post" style="display: inline;">
+              <input type="hidden" name="_method" value="delete">
+              <button type="submit" class="btn btn-delete">削除</button>
+            </form>
+            <a th:href="@{/teacherlist/edit/{tid}(id=${teacher.tid})}" class="btn btn-edit">編集</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <a href="/">トップに戻る</a>
+  <div th:unless="${teacherList != null and not #lists.isEmpty(teacherList)}">
+    <p>データなし</p>
+  </div>
+  <a href="/teacher/">学生情報を入力する</a>
+</body>
+
+</html>
