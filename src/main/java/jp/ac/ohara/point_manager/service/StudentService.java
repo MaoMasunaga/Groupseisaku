@@ -1,8 +1,10 @@
 package jp.ac.ohara.point_manager.service;
 
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,12 +23,32 @@ public class StudentService {
         return repository.findAll();
     }
 
-	 // 学生データの保存
-	    public void save(StudentModel student) {
-	        repository.save(student);
-	    }
-    
+    // 詳細データの取得
+    public StudentModel get(@NonNull Long index) {
+        return repository.findById(index).orElse(null);
+    }
+
     // 学生データの保存
+    public void save(@NonNull StudentModel student) {
+        repository.save(student);
+    }
+
+    // 学生データの削除
+    public void delete(@NonNull Long index) {
+        repository.deleteById(index);
+    }
+
+    // 全ての学生データを取得
+    public List<StudentModel> getStudentList1() {
+        return repository.findAll();
+    }
+
+    // IDによる学生データの取得
+    public StudentModel getStudentById(Long id) {
+        return repository.findById(id).orElse(null);
+    }
+
+    // 学生データの保存または更新
     public void saveOrUpdateStudent(StudentModel student) {
         repository.save(student);
     }
@@ -36,20 +58,6 @@ public class StudentService {
         repository.deleteById(id);
     }
 
-    // 入学年度、クラス番号、在学中か否かで絞り込み検索
-    public List<StudentModel> filterStudents(Integer enrollmentYear, String className, Boolean isActive) {
-        // 入学年度、クラス番号、在籍状況のいずれかが指定された場合は絞り込み検索を実行
-        if (enrollmentYear != null || className != null || isActive != null) {
-            return repository.findByEntYearAndClassNumAndIsAttend(enrollmentYear, className, isActive);
-        } else {
-            // すべての条件がnullの場合は全ての学生情報を返す
-            return repository.findAll();
-        }
-    }
-
-    // IDを指定して学生データを取得
-    public StudentModel getStudentById(Long id) {
-        return repository.findById(id).orElse(null);
-    }
+   
 
 }

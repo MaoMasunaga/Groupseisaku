@@ -1,5 +1,4 @@
 package jp.ac.ohara.point_manager.config;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -12,10 +11,10 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		http.httpBasic(
-			(basic) ->
-			basic.disable()
-		);
-		return http.build();
-	}
+        http.httpBasic(
+            (basic) ->
+            basic.disable()
+        );
+        return http.build();
+    }
 }

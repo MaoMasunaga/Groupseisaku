@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,12 +14,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import io.micrometer.common.lang.NonNull;
 import jp.ac.ohara.point_manager.model.StudentModel;
 import jp.ac.ohara.point_manager.service.StudentService;
 
 @Controller
 public class MainController {
-    
+	
     @Autowired
     private StudentService studentService;
 
@@ -29,43 +29,20 @@ public class MainController {
         return "index";
     }
 
-
-	// 学生登録ページ
+    // 学生登録ページ
     @GetMapping("/setstu/")
-    public ModelAndView add(ModelAndView model) {
-        model.addObject("student", new StudentModel()); 
+    public ModelAndView add(StudentModel student, ModelAndView model) {
+        model.addObject("student", student); 
         model.setViewName("setstu");
         return model;
     }
 
-    @PostMapping("/setstu/")
-    public String student(@Validated @ModelAttribute StudentModel student, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
-        if (bindingResult.hasErrors()) {
-            // バリデーションエラーがある場合の処理
-            return "setstu"; // エラーがあるため、登録ページに戻る
-        }
-        try {
-            studentService.saveOrUpdateStudent(student);
-            redirectAttributes.addFlashAttribute("exception", "");
-        } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("exception", e.getMessage());
-        }
-        return "redirect:/";
-    }
-	
-	
-    // 学生登録ページ
-    @GetMapping("/setstu/")
-    public String add(Model model) {
-        model.addAttribute("student", new StudentModel()); 
-        return "setstu";
-    }
-
     //Form送信
     @PostMapping("/setstu/")
-    public String student(@ModelAttribute StudentModel student, RedirectAttributes redirectAttributes) {
+    public String student(@Validated @ModelAttribute @NonNull StudentModel student, RedirectAttributes result, ModelAndView model,
+            RedirectAttributes redirectAttributes) {
         try {
-            studentService.saveOrUpdateStudent(student);
+            this.studentService.save(student);
             redirectAttributes.addFlashAttribute("exception", "");
 
         } catch (Exception e) {
@@ -77,7 +54,7 @@ public class MainController {
 
     //学生・成績・出席リスト表示・出席詳細表示
     @GetMapping("/studentlist/")
-    public String showStudentList(Model model) {
+    public String add3(Model model) {
         model.addAttribute("studentList", studentService.getStudentList());
         return "studentlist";
     }
@@ -85,7 +62,7 @@ public class MainController {
     // 学生情報の削除
     @PostMapping("/setstu/delete/{id}")
     public String deleteStudent(@PathVariable Long id) {
-        studentService.deleteStudent(id);
+        studentService.delete(id);
         return "redirect:/studentlist/";
     }
 
@@ -108,7 +85,7 @@ public class MainController {
 
     // 学生情報の更新
     @PostMapping("/studentlist/update/{id}")
-    public String updateStudent(@PathVariable Long id, @ModelAttribute StudentModel student, RedirectAttributes redirectAttributes) {
+    public String updateStudent(@PathVariable Long id, @Validated @ModelAttribute @NonNull StudentModel student, RedirectAttributes redirectAttributes) {
         student.setId(id);
         try {
             studentService.saveOrUpdateStudent(student);
@@ -118,7 +95,6 @@ public class MainController {
         }
         return "redirect:/studentlist/";
     }
-    
-    
 
+   
 }
