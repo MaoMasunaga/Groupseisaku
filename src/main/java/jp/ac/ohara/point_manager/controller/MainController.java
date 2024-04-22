@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import io.micrometer.common.lang.NonNull;
 import jp.ac.ohara.point_manager.model.StudentModel;
+import jp.ac.ohara.point_manager.model.TeacherModel;
 import jp.ac.ohara.point_manager.service.StudentService;
 
 @Controller
@@ -26,6 +27,24 @@ public class MainController {
 	
     @Autowired
     private StudentService studentService;
+    
+    
+    //ログインページ
+    @GetMapping("/login/")
+    public ModelAndView getLogin(TeacherModel teachermodel, ModelAndView model) {
+  	  model.addObject("teachermodel", teachermodel);
+  	  model.setViewName("login");
+  	  return model;
+    }
+ 
+    @PostMapping("/login/")
+
+	public String postLogin(@PathVariable("id") Long id , Model model) {
+
+		return "redirect:index";
+
+	}
+
 
     @GetMapping("/")
     public String index(Model model) {

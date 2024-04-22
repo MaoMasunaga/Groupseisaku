@@ -9,5 +9,6 @@ import jp.ac.ohara.point_manager.model.TeacherModel;
 
 @Repository
 public interface TeacherRepository  extends JpaRepository<TeacherModel, Long>{
+	TeacherModel findByTidEquals(String tid);
 	
 }

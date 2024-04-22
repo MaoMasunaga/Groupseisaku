@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
@@ -16,6 +17,9 @@ public class  TeacherService{
 
     @Autowired
     private TeacherRepository repository;
+    
+	@Autowired    
+	private PasswordEncoder passwordEncoder;
 
     //科目一覧の取得
      
@@ -30,13 +34,6 @@ public class  TeacherService{
     	TeacherModel teacher = this.repository.findById(index).orElse(new TeacherModel());
         return teacher;
     }
-
-    public void save(@NonNull TeacherModel teacher) {
-    	System.out.println(teacher);
-        this.repository.save(teacher);
-    }
-
-
 
 		//科目データの削除・編集
 	
@@ -59,6 +56,12 @@ public class  TeacherService{
 	    public void deleteTeacher(Long id) {
 	        repository.deleteById(id);
 	    }
+	    
+	    public void save(@NonNull TeacherModel teacher) {
+	    	teacher.setPassword(this.passwordEncoder.encode(teacher.getPassword()));
+	        this.repository.save(teacher);
+	    }
+
 	}
 
 		
