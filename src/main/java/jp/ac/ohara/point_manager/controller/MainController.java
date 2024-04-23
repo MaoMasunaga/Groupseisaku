@@ -38,9 +38,8 @@ public class MainController {
     }
  
     @PostMapping("/login/")
-
 	public String postLogin(@PathVariable("id") Long id , Model model) {
-
+    	System.out.println("aaa");
 		return "redirect:index";
 
 	}

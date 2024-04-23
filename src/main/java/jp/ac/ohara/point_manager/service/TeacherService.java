@@ -58,7 +58,7 @@ public class  TeacherService{
 	    }
 	    
 	    public void save(@NonNull TeacherModel teacher) {
-	    	teacher.setPassword(this.passwordEncoder.encode(teacher.getPassword()));
+	    	//teacher.setPassword(this.passwordEncoder.encode(teacher.getPassword()));
 	        this.repository.save(teacher);
 	    }
 
