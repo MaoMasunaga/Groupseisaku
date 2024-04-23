@@ -7,6 +7,7 @@
 
 <body>
     <h2>先生情報登録</h2>
+    
     <form class="form py-4 needs-validation h-adr" method="post" th:action="@{/teacher/}" th:object="${teacher}"
         onsubmit="hashPassword()">
 
@@ -57,6 +58,7 @@
             // passwordField.value = hashedPassword;
         }
     </script>
+    
 </body>
 
 </html>
