@@ -23,6 +23,8 @@ public class TeacherDetailsServiceImplt implements UserDetailsService {
 		System.out.println("serach tid : " + tid);
 		TeacherModel user = this.userRepository.findByTidEquals(tid); // emailで検索するので「EmailEquals」としている
 		System.out.println(user.toString());
+		String abc = "111";
+		
 		return user;
 	}
 }

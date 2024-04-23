@@ -54,7 +54,7 @@ public class SecurityConfig {
 					form
 							.loginPage("/login/")             // ログインページのURI
 							.loginProcessingUrl("/login/")    // ログインを実施するページのURI
-							.defaultSuccessUrl("/")           // ログイン完了後の遷移先
+							.defaultSuccessUrl("/setstu/")           // ログイン完了後の遷移先
 							.usernameParameter("tid") // ログインユーザのname属性
 							.passwordParameter("password");   // ログインパスワードのname属性
 				})
