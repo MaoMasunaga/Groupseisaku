@@ -1,4 +1,4 @@
-;<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -6,6 +6,7 @@
 </head>
 
 <body>
+	<link th:href=@{/css/style.css} rel="stylesheet">
     <h2>先生情報登録</h2>
     
     <form class="form py-4 needs-validation h-adr" method="post" th:action="@{/teacher/}" th:object="${teacher}"
