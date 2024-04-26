@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Test Score</title>
+</head>
+<body>
+    <h2>Add Test Score</h2>
+    <form action="/subjects/{subjectId}/tests" method="POST">
+        <label for="studentNo">Student No:</label><br>
+        <input type="text" id="studentNo" name="studentNo" required><br>
+        
+        <label for="subjectCd">Subject Code:</label><br>
+        <input type="text" id="subjectCd" name="subjectCd" required><br>
+        
+        <label for="schoolCd">School Code:</label><br>
+        <input type="number" id="schoolCd" name="schoolCd" required><br>
+        
+        <label for="no">Test No:</label><br>
+        <input type="number" id="no" name="no" required><br>
+        
+        <label for="point">Test Point:</label><br>
+        <input type="number" id="point" name="point"><br>
+        
+        <label for="classNum">Class Number:</label><br>
+        <input type="text" id="classNum" name="classNum"><br><br>
+        
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
