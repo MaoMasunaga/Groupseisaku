@@ -6,6 +6,7 @@
 </head>
 
 <body>
+<link th:href=@{/css/style.css} rel="stylesheet">
   <h1>学生情報の編集</h1>
   <form th:object="${student}" th:action="@{/studentlist/update/{id}(id=${student.id})}" method="post">
     <input type="hidden" th:field="*{id}">
