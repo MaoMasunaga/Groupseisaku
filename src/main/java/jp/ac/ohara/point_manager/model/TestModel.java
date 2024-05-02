@@ -1,7 +1,5 @@
 package jp.ac.ohara.point_manager.model;
 
-
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,7 +29,6 @@ public  class TestModel{
 	private Integer point;
 	@Column(length = 5, nullable = true, name = "class_num")
 	private String classNum;
-	
-	
-	
+ 
+ 
 	}

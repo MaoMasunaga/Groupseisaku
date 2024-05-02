@@ -68,7 +68,7 @@ public class MainController {
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("exception", e.getMessage());
         }
-        return "redirect:/";
+        return "studentcomplete";
 
     }
 

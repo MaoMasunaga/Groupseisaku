@@ -2,27 +2,30 @@
 <html>
 
 <head>
-  <meta charset="UTF-8">
-  <title>学生管理</title>
+    <meta charset="UTF-8">
+    <title>学生管理</title>
+    <link th:href=@{css/style.css} rel="stylesheet">
 </head>
-<h3 class="float-md-start mb-0">学生ページ</h3>
-<header class="mb-auto">
-	<link th:href=@{css/style.css} rel="stylesheet">
-  <div>
-    <nav class="nav nav-masthead justify-content-center float-md-end">
-      <a class="nav-link fw-bold py-1 px-0" aria-current="page" href="/">メニュー</a>
-      <a class="nav-link fw-bold py-1 px-0 active" href="/studentlist/">学生管理</a>
-      <a class="nav-link fw-bold py-1 px-0" href="/test/">成績登録</a>
-      <a class="nav-link fw-bold py-1 px-0" href="/subject/">科目登録</a>
-      <a class="nav-link fw-bold py-1 px-0" href="#">成績参照</a>
-      <a class="nav-link fw-bold py-1 px-0" href="/subjectlist/">科目管理</a>
-
-    </nav>
-  </div>
-</header>
 
 <body>
-	
+    <h1 style="background-color:rgb(128, 255, 255)">得点管理システム</h1>
+    <div style="display: flex;">
+        <header class="mb-auto" style="padding: 10px;">
+            <nav class="nav nav-masthead justify-content-center float-md-end">
+                <ul>
+                    <li><a class="nav-link fw-bold py-1 px-0" aria-current="page" href="/">メニュー</a></li>
+                    <li><a class="nav-link fw-bold py-1 px-0 active" href="/studentlist/">学生管理</a></li>
+                    <li><a class="nav-link fw-bold py-1 px-0" href="/test/">成績登録</a></li>
+                    <li><a class="nav-link fw-bold py-1 px-0" href="/subject/">科目登録</a></li>
+                    <li><a class="nav-link fw-bold py-1 px-0" href="#">成績参照</a></li>
+                    <li><a class="nav-link fw-bold py-1 px-0" href="/subjectlist/">科目管理</a></li>
+                </ul>
+            </nav>
+        </header>
+        <div style="flex-grow: 1;"> <!-- body要素を水平方向に伸ばすためにflex-growを使用 -->
+            <h2>メニュー</h2>
+        </div>
+    </div>
 </body>
 
 </html>

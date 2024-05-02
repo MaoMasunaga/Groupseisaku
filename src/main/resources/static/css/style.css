@@ -1,0 +1,48 @@
+/* styles.css */
+
+body {
+    margin: 0; /* デフォルトのマージンを取り除く */
+    font-family: Arial, sans-serif; /* フォントファミリーを指定 */
+}
+
+h1 {
+    margin: 0; /* デフォルトのマージンを取り除く */
+    background-color: rgb(128, 255, 255);
+    padding: 10px;
+}
+
+.container {
+    display: flex; /* 子要素をフレックスコンテナにする */
+    flex-direction: column; /* 子要素を縦方向に配置 */
+    height: 100vh; /* コンテナをビューポートの高さいっぱいにする */
+}
+
+header {
+    padding: 10px;
+    text-align: left; /* ヘッダー内のテキストを左寄せにする */
+    margin-bottom: 20px; /* ヘッダーとボディの間に20pxのマージンを追加 */
+    display: inline-block; /* ヘッダーをブロックではなくインラインブロック要素に変更 */
+}
+
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    margin-bottom: 10px; /* リストアイテム間の間隔 */
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: black;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+.main-content {
+    flex-grow: 1; /* メインコンテンツを残りのスペースいっぱいに伸ばす */
+}
