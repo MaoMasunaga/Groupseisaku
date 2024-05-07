@@ -17,8 +17,4 @@ public  class Class_numModel{
 	private String schoolCd;
 	@Column(length = 5, nullable = false, name = "class_num")
 	private String classNum;
- 
- 
- 
- 
 	}

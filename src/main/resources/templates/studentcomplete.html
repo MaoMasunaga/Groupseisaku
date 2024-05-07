@@ -9,7 +9,8 @@
 
 <body>
     <h1 style="background-color:rgb(128, 255, 255)">得点管理システム</h1>
-    <div style="display: flex;">
+<link th:href=@{/css/style.css} rel="stylesheet">
+<div style="display: flex;">
         <header class="mb-auto" style="padding: 10px;">
             <nav class="nav nav-masthead justify-content-center float-md-end">
                 <ul>
@@ -22,33 +23,11 @@
                 </ul>
             </nav>
         </header>
- <link th:href=@{/css/style.css} rel="stylesheet">
-  <form th:object="${student}" th:action="@{/studentlist/update/{id}(id=${student.id})}" method="post">
-    <input type="hidden" th:field="*{id}">
-    <label>入学年度:</label>
-    <select th:field="*{entYear}">
-      <option th:each="year : ${years}" th:value="${year}" th:text="${year}" th:selected="${year == student.entYear}">
-      </option>
-    </select>
-    <br>
-    <label>学生番号:</label>
-    <input type="text" th:field="*{no}">
-    <br>
-    <label>学生名:</label>
-    <input type="text" th:field="*{name}">
-    <br>
-    <label>クラス番号:</label>
-    <select th:field="*{classNum}">
-      <option th:each="classNum : ${classNumbers}" th:value="${classNum}" th:text="${classNum}" th:selected="${classNum == student.classNum}">
-      </option>
-      </select>
-      <br>
-    <label>在学中:</label> 
-	<input type="checkbox" th:field="*{isAttend}">
-	<br>
-
-    <button type="submit">更新する</button>
-  </form>
-</body>
+<div style="flex-grow: 1;"> <!-- body要素を水平方向に伸ばすためにflex-growを使用 -->
+<p>登録が完了しました</p>
+		<a href="/">戻る</a>
+		<a href="/studentlist/">学生一覧</a>
+</div>
+    </body>
 
 </html>

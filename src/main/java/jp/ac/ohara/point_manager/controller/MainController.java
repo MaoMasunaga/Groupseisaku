@@ -44,7 +44,6 @@ public class MainController {
 
 	}
 
-
     @GetMapping("/")
     public String index(Model model) {
         return "index";
@@ -69,7 +68,7 @@ public class MainController {
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("exception", e.getMessage());
         }
-        return "redirect:/";
+        return "studentcomplete";
 
     }
 
