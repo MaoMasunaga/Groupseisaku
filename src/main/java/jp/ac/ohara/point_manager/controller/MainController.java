@@ -122,8 +122,14 @@ public class MainController {
             @RequestParam(value = "classNum", required = false) String classNum,
             @RequestParam(value = "isAttend", required = false) Boolean isAttend,
             Model model) {
-        // nullでない条件のみを検索に使用する
-        List<StudentModel> students = studentService.searchStudents(entYear, classNum, isAttend);
+        // 条件がnullでない場合のみ検索に使用する
+        List<StudentModel> students;
+        if (entYear != null || classNum != null || isAttend != null) {
+            students = studentService.searchStudents(entYear, classNum, isAttend);
+        } else {
+            // 全ての条件がnullの場合は全ての学生を表示
+            students = studentService.getStudentList();
+        }
         model.addAttribute("studentList", students);
         return "studentlist";
     }

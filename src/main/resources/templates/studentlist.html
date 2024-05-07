@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>学生管理</title>
-    <link th:href=@{/css/style.css} rel="stylesheet">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
 </head>
 
 <body>
@@ -15,74 +15,96 @@
                 <ul>
                     <li><a class="nav-link fw-bold py-1 px-0" aria-current="page" href="/">メニュー</a></li>
                     <li><a class="nav-link fw-bold py-1 px-0 active" href="/studentlist/">学生管理</a></li>
-                    <li><a class="nav-link fw-bold py-1 px-0" href="/test/">成績登録</a></li>
+                    <li><a class="nav-link fw-bold py-1 px-0" href="/point/">成績登録</a></li>
                     <li><a class="nav-link fw-bold py-1 px-0" href="/subject/">科目登録</a></li>
                     <li><a class="nav-link fw-bold py-1 px-0" href="#">成績参照</a></li>
                     <li><a class="nav-link fw-bold py-1 px-0" href="/subjectlist/">科目管理</a></li>
                 </ul>
             </nav>
         </header>
-        <div style="flex-grow: 1;"> <!-- body要素を水平方向に伸ばすためにflex-growを使用 -->
-            <form th:action="@{/studentlist/search}" method="get">
-           <select name="entYear">
-    <option value="" selected>入学年度を選択</option>
-    <option th:each="year : ${years}" th:value="${year}" th:text="${year}"></option>
-</select>
+        <div style="flex-grow: 1;">
+            <form id="searchForm" method="get">
+                <select name="entYear">
+                    <option value="" selected>入学年度を選択</option>
+                    <option th:each="year : ${years}" th:value="${year}" th:text="${year}"></option>
+                </select>
 
-<select name="classNum">
-    <option value="" selected>クラス番号を選択</option>
-    <option th:each="classNumber : ${classNumbers}" th:value="${classNumber}" th:text="${classNumber}"></option>
-</select>
+                <select name="classNum">
+                    <option value="">クラス番号を選択</option>
+                    <option th:each="classNumber : ${classNumbers}" th:value="${classNumber}" th:text="${classNumber}"></option>
+                </select>
 
-            
-            <input type="checkbox" id="isAttend" name="isAttend" value="true">
-<label for="isAttend">在学中</label>
+                <input type="checkbox" id="isAttend" name="isAttend" value="true">
+                <label for="isAttend">在学中</label>
 
-            <button type="submit">検索</button>
-        </form>
+                <button type="button" onclick="submitForm()">検索</button>
+            </form>
 
-    <div th:if="${studentList != null}">
-		<a class="nav-link fw-bold py-1 px-0" href="/setstu/">新規登録</a>
-       
-        <table>
-            <thead>
-                <tr>
-                    <th>入学年度</th>
-                    <th>学生番号</th>
-                    <th>学生名</th>
-                    <th>クラス番号</th>
-                    <th>在学中</th>
-                    <th>操作</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="student : ${studentList}">
-                    <td th:text="${student.entYear}"></td>
-                    <td th:text="${student.no}"></td>
-                    <td th:text="${student.name}"></td>
-                    <td th:text="${student.classNum}"></td>
-                    <td>
-                        <span th:if="${student.isAttend}">〇</span>
-                        <span th:unless="${student.isAttend}">×</span>
-                    </td>
-                    <td>
-                        <form th:action="@{/setstu/delete/{id}(id=${student.id})}" method="post" style="display: inline;">
-                            <input type="hidden" name="_method" value="delete">
-                            <button type="submit" class="btn btn-delete">削除</button>
-                        </form>
-                        <a th:href="@{/studentlist/edit/{id}(id=${student.id})}" class="btn btn-edit">編集</a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <div th:unless="${studentList != null}">
-        <p>データなし</p>
-    </div>
-    <a href="/">学生一覧に戻る</a>
+            <div th:if="${studentList != null}">
+                <a class="nav-link fw-bold py-1 px-0" href="/setstu/">新規登録</a>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>入学年度</th>
+                            <th>学生番号</th>
+                            <th>学生名</th>
+                            <th>クラス番号</th>
+                            <th>在学中</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="student : ${studentList}">
+                            <td th:text="${student.entYear}"></td>
+                            <td th:text="${student.no}"></td>
+                            <td th:text="${student.name}"></td>
+                            <td th:text="${student.classNum}"></td>
+                            <td>
+                                <span th:if="${student.isAttend}">〇</span>
+                                <span th:unless="${student.isAttend}">×</span>
+                            </td>
+                            <td>
+                                <form th:action="@{/setstu/delete/{id}(id=${student.id})}" method="post"
+                                    style="display: inline;">
+                                    <input type="hidden" name="_method" value="delete">
+                                    <button type="submit" class="btn btn-delete">削除</button>
+                                </form>
+                                <a th:href="@{/studentlist/edit/{id}(id=${student.id})}" class="btn btn-edit">編集</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div th:unless="${studentList != null}">
+                <p>データなし</p>
+            </div>
+            <a href="/">学生一覧に戻る</a>
         </div>
     </div>
-    
+
+    <script>
+        function submitForm() {
+            var form = document.getElementById('searchForm');
+            var entYear = form.querySelector('select[name="entYear"]').value;
+            var classNum = form.querySelector('select[name="classNum"]').value;
+            var isAttend = form.querySelector('input[name="isAttend"]').checked;
+
+            var url = '/studentlist/search?';
+            if (entYear !== '') {
+                url += 'entYear=' + entYear + '&';
+            }
+            if (classNum !== '') {
+                url += 'classNum=' + classNum + '&';
+            }
+            if (isAttend) {
+                url += 'isAttend=true';
+            }
+
+            window.location.href = url;
+        }
+    </script>
+
 </body>
 
 </html>

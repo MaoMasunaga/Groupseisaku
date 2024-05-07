@@ -22,4 +22,6 @@ public interface StudentRepository extends JpaRepository<StudentModel, Long> {
     List<StudentModel> findByClassNumAndIsAttend(String classNum, Boolean isAttend);
     //入学年度とクラスと在学状況
     List<StudentModel> findByEntYearAndClassNumAndIsAttend(Integer entYear, String classNum, Boolean isAttend);
+    
+    StudentModel findByNo(String studentNo);
 }
