@@ -14,6 +14,7 @@ public class TeacherDetailsServiceImplt implements UserDetailsService {
 
 	@Autowired
 	private TeacherRepository userRepository; // ユーザモデルのRepository
+	
 
 	/**
 	 * ユーザの検索を行う
@@ -26,5 +27,6 @@ public class TeacherDetailsServiceImplt implements UserDetailsService {
 		String abc = "111";
 		
 		return user;
-	}
+	
+}
 }

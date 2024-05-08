@@ -1,6 +1,7 @@
 package jp.ac.ohara.point_manager.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
@@ -13,7 +14,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import io.micrometer.common.lang.NonNull;
 import jp.ac.ohara.point_manager.model.SubjectModel;
+import jp.ac.ohara.point_manager.model.TeacherModel;
 import jp.ac.ohara.point_manager.service.SubjectService;
+import jp.ac.ohara.point_manager.service.TeacherDetailsServiceImplt;
 
 
 
@@ -23,6 +26,9 @@ public class SubjectController {
 	
 	@Autowired
 	private SubjectService subjectService;
+	@Autowired
+	private TeacherDetailsServiceImplt userService;
+	
 	
 
 	// 成績登録ページ
@@ -35,9 +41,12 @@ public class SubjectController {
 	
 	//Form送信
 	@PostMapping("/subject/")
-	public String subject(@Validated @ModelAttribute @NonNull SubjectModel subject, RedirectAttributes result, ModelAndView model,
-	        RedirectAttributes redirectAttributes) {
+	public String subject(@Validated @ModelAttribute @NonNull SubjectModel subject ,RedirectAttributes result, ModelAndView model,
+	        RedirectAttributes redirectAttributes, @AuthenticationPrincipal  TeacherModel user) {
+		System.out.println("登録完了");
+		System.out.println(subject);
 	    try {
+	    	subject.setSchoolCd(user.getSchoolCd());
 	        this.subjectService.save(subject);
 	        redirectAttributes.addFlashAttribute("exception", "");
 

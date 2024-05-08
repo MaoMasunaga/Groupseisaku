@@ -90,6 +90,10 @@ public  class TeacherModel implements UserDetails{
 	        this.password = passwordEncoder.encode(password);
 	    }
 	 
+	 public String getSchoolCd() {
+	        return this.schoolCd;
+	    }
+	 
 	}
 	
 
