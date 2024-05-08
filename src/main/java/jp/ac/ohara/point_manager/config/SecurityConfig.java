@@ -28,7 +28,6 @@ public class SecurityConfig {
 		return jdbcManager;
 	}
     
-
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
 		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
@@ -68,5 +67,4 @@ public class SecurityConfig {
 				});
 		return http.build();
 	}
-	
 }

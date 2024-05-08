@@ -27,11 +27,31 @@
 
     
     <p th:if="${param.error}">
-        Student not found. Please check the student number.
+        既に存在している学生です。.
     </p>
     <p th:if="${param.success}">
-        Point registered successfully.
+        エラー
     </p>
+    
+    <form id="searchForm" method="get">
+                <select name="entYear">
+                    <option value="" selected>入学年度を選択</option>
+                    <option th:each="year : ${years}" th:value="${year}" th:text="${year}"></option>
+                </select>
+
+                <select name="classNum">
+                    <option value="">クラス番号を選択</option>
+                    <option th:each="classNumber : ${classNumbers}" th:value="${classNumber}" th:text="${classNumber}"></option>
+                </select>
+                
+                <select name="classNum">
+                    <option value="">科目</option>
+                    <option th:each="classNumber : ${classNumbers}" th:value="${classNumber}" th:text="${classNumber}"></option>
+                </select>
+
+                <button type="button" onclick="submitForm()">検索</button>
+            </form>
+
 
     
     <form class="form py-4 needs-validation h-adr" method="post" th:action="@{/point/}" th:object="${test}">
