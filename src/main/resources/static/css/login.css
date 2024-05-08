@@ -1,0 +1,18 @@
+/* フォーム要素を中央揃えにする */
+.form-group {
+    text-align: center;
+}
+
+/* ボタンを中央揃えにする */
+.btn {
+    margin: 0 auto;
+    display: block;
+}
+
+h2 {
+    text-align: center;
+}
+
+p {
+    text-align: center;
+}
