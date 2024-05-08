@@ -30,12 +30,14 @@ public class TeacherController {
         model.addAttribute("teacher", new TeacherModel());
         return "teacher";
     }
+    
 
     // 先生登録フォームの処理
     @PostMapping("/teacher/")
     public String registerTeacher(@Validated @ModelAttribute @NonNull TeacherModel teacher, RedirectAttributes redirectAttributes) {
         try {
             // パスワードをハッシュ化してセット
+        	teacher.setSchoolCd("AAA");
             String hashedPassword = passwordEncoder.encode(teacher.getPassword());
             teacher.setPassword(hashedPassword);
 
