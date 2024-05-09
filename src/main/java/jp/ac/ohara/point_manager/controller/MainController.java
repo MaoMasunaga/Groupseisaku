@@ -43,6 +43,13 @@ public class MainController {
 		return "redirect:index";
 
 	}
+    
+    @GetMapping("/logout/")
+    public String logout() {
+        // ログアウト処理を行う
+        // ここでセッションを無効化したり、必要なクリア処理を行います
+        return "logout"; // logout.html を表示させる
+    }
 
     @GetMapping("/")
     public String index(Model model) {

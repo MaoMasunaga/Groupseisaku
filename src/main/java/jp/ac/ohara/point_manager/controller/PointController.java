@@ -21,7 +21,7 @@ public class PointController {
     @Autowired
     private StudentRepository studentRepository;
 
- // 学生登録ページ
+ // 成績ページ
     @GetMapping("/point/")
     public ModelAndView add(TestModel test, ModelAndView model) {
         model.addObject("test", test); 
