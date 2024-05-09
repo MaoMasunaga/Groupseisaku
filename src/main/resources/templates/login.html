@@ -7,28 +7,27 @@
 <title>ログイン</title>
 </head>
 <body>
-	<link th:href=@{/css/login.css} rel="stylesheet">
-					<form method="post" th:action="@{/login/}" th:object="${teachermodel}">
-							<h2> ログイン </h2>
-							<div class="form-group">
-								<input type="text"
-									id="tid" class="form-control" placeholder="ID"
-									name="tid" th:field="*{tid}" re>
-							</div>
-							<div class="form-group">
-								<input type="password"
-									id="password" class="form-control" placeholder="Password"
-									name="password" th:field="*{password}">
-							</div>
-							<div class="form-group">
-								<button type="submit" class="btn btn-primary">ログイン</button>
-							</div>
-					</form>
-		<div class="row">
-			<div class="text-center">
-				<a href="teacher.html" th:href="@{/teacher/}"><p>ユーザ登録はこちら</p></a>
-			</div>
-		</div>
-	</div>
+    <link th:href="@{/css/login.css}" rel="stylesheet">
+    <form method="post" th:action="@{/login/}" th:object="${teachermodel}">
+        <h2> ログイン </h2>
+        <div class="form-group">
+            <input type="text"
+                id="tid" class="form-control" placeholder="ID"
+                name="tid" th:field="*{tid}" required>
+        </div>
+        <div class="form-group">
+            <input type="password"
+                id="password" class="form-control" placeholder="Password"
+                name="password" th:field="*{password}" required>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">ログイン</button>
+        </div>
+    </form>
+    <div class="row">
+        <div class="text-center">
+            <a href="teacher.html" th:href="@{/teacher/}"><p>ユーザ登録はこちら</p></a>
+        </div>
+    </div>
 </body>
 </html>
