@@ -23,7 +23,7 @@ public class TestModel {
     private String subjectCd;
 
     @Column(length = 10, nullable = false, name = "school_cd")
-    private int schoolCd;
+    private Integer schoolCd;
 
     @Column(length = 10, nullable = false, name = "no")
     private Integer no;
