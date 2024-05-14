@@ -6,6 +6,10 @@ import java.util.stream.IntStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+<<<<<<< HEAD
+=======
+import org.springframework.security.core.userdetails.UserDetails;
+>>>>>>> branch 'master' of https://github.com/MaoMasunaga/Groupseisaku
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

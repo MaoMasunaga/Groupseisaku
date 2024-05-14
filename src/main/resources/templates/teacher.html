@@ -6,7 +6,7 @@
 </head>
 
 <body>
-	<link th:href=@{/css/style.css} rel="stylesheet">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
     <h2>先生情報登録</h2>
     
     <form class="form py-4 needs-validation h-adr" method="post" th:action="@{/teacher/}" th:object="${teacher}"
@@ -17,7 +17,7 @@
             <div class="col-4">
                 <input type="text" class="form-control" id="tid" name="tid" th:field="*{tid}"
                     th:classappend="${#fields.hasErrors('tid')} ? 'is-invalid' : 'is-valid'">
-                <div th:if="${#fields.hasErrors('tid')}" th:errors="*{tid}" class="invalid-feedback">errors!</div>
+                <div th:if="${#fields.hasErrors('tid')}" class="invalid-feedback">教員IDを入力してください</div>
             </div>
         </div>
 
@@ -27,7 +27,7 @@
             <div class="col-4">
                 <input type="password" class="form-control" id="password" name="password"
                     th:field="*{password}" th:classappend="${#fields.hasErrors('password')} ? 'is-invalid' : 'is-valid'">
-                <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="invalid-feedback">errors!</div>
+                <div th:if="${#fields.hasErrors('password')}" class="invalid-feedback">パスワードを入力してください</div>
             </div>
         </div>
 
@@ -36,8 +36,7 @@
             <div class="col-4">
                 <input type="text" class="form-control" id="schoolCd" name="schoolCd" th:field="*{schoolCd}"
                     th:classappend="${#fields.hasErrors('schoolCd')} ? 'is-invalid' : 'is-valid'">
-                <div th:if="${#fields.hasErrors('schoolCd')}" th:errors="*{schoolCd}"
-                    class="invalid-feedback">errors!</div>
+                <div th:if="${#fields.hasErrors('schoolCd')}" class="invalid-feedback">学校コードを入力してください</div>
             </div>
         </div>
 
@@ -59,7 +58,6 @@
             // passwordField.value = hashedPassword;
         }
     </script>
-    
 </body>
 
 </html>
