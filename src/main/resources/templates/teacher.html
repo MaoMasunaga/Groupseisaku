@@ -11,6 +11,15 @@
     
     <form class="form py-4 needs-validation h-adr" method="post" th:action="@{/teacher/}" th:object="${teacher}"
         onsubmit="hashPassword()">
+        
+                <div class="row mt-3">
+            <label for="name" class="col-4 col-form-label text-end">名前</label>
+            <div class="col-4">
+                <input type="text" class="form-control" id="name" name="name" th:field="*{name}"
+                    th:classappend="${#fields.hasErrors('name')} ? 'is-invalid' : 'is-valid'">
+                <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="invalid-feedback">errors!</div>
+            </div>
+        </div>
 
         <div class="row mt-3">
             <label for="tid" class="col-4 col-form-label text-end">教員ID</label>

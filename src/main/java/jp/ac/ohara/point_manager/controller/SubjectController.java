@@ -2,7 +2,6 @@ package jp.ac.ohara.point_manager.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
@@ -34,10 +33,10 @@ public class SubjectController {
 
 	// 成績登録ページ
 	@GetMapping("/subject/")
-	public ModelAndView add(@AuthenticationPrincipal UserDetails user, Model model1, SubjectModel subject, ModelAndView model) {
+	public ModelAndView add(@AuthenticationPrincipal TeacherModel teachermodel, Model model1, SubjectModel subject, ModelAndView model) {
 		  model.addObject("subject", subject); 
 		  model.setViewName("subject");
-		  model1.addAttribute("user2",user);
+		  model.addObject("user2",teachermodel);
 
 
 		  return model;
@@ -64,10 +63,10 @@ public class SubjectController {
 
 	//学生・成績・出席リスト表示・出席詳細表示
 	@GetMapping("/subjectlist/")
-	public String add3(@AuthenticationPrincipal UserDetails user,Model model) {
+	public String add3(@AuthenticationPrincipal TeacherModel teachermodel,Model model) {
 	  System.out.println(subjectService.getSubjectList().toString());
 	    model.addAttribute("subjectList", subjectService.getSubjectList());
-	    model.addAttribute("user2",user);
+	    model.addAttribute("user2",teachermodel);
 
 
 	    return "subjectlist";
@@ -82,10 +81,10 @@ public class SubjectController {
 		
 		// 成績情報の編集ページ
 	@GetMapping("/subjectlist/edit/{id}")
-	public String editSubject(@AuthenticationPrincipal UserDetails user,@PathVariable Long id, Model model) {
+	public String editSubject(@AuthenticationPrincipal TeacherModel teachermodel,@PathVariable Long id, Model model) {
 	    SubjectModel subject = subjectService.getSubjectById(id);
 	    model.addAttribute("subject", subject);
-	    model.addAttribute("user2",user);
+	    model.addAttribute("user2",teachermodel);
 
 
 	    return "edit_subject";
