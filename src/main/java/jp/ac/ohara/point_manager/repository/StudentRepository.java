@@ -23,5 +23,12 @@ public interface StudentRepository extends JpaRepository<StudentModel, Long> {
     //入学年度とクラスと在学状況
     List<StudentModel> findByEntYearAndClassNumAndIsAttend(Integer entYear, String classNum, Boolean isAttend);
     
+    //成績登録用
+    //入学年度とクラスと学生番号と氏名
+    List<StudentModel>findByEntYearAndClassNumAndNoAndName(Integer entYear, String classNum, String no, String name);
+    
+    List<StudentModel> findBySchoolCd(String schoolCd);
+    
+    
     StudentModel findByNo(String studentNo);
 }

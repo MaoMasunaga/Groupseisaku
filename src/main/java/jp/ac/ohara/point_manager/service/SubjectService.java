@@ -1,5 +1,6 @@
 package jp.ac.ohara.point_manager.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,6 +59,26 @@ public class  SubjectService{
 	
 	    public void deleteSubject(Long id) {
 	        repository.deleteById(id);
+	    }
+
+	    public List<String> getAllSubjects() {
+	        // subjectRepositoryを使用してsubjecttableからすべての科目名を取得
+	        List<SubjectModel> subjects = repository.findAll();
+
+	        // 科目名を格納するリストを作成
+	        List<String> subjectNames = new ArrayList<>();
+
+	        // Subjectエンティティから科目名を取り出してリストに追加
+	        for (SubjectModel subject : subjects) {
+	            subjectNames.add(subject.getName());
+	        }
+
+	        return subjectNames;
+	    }
+	    
+	    public List<SubjectModel> getAllSubjectBySchoolCd(String schoolCd) {
+	        // schoolCdに基づいて科目のデータをデータベースから取得するロジックを実装する
+	        return repository.findBySchoolCd(schoolCd);
 	    }
 	}
 

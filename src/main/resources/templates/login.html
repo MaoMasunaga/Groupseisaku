@@ -7,39 +7,30 @@
 <title>ログイン</title>
 </head>
 <body>
-	<link th:href=@{/css/login.css} rel="stylesheet">
-	<div class="container">
-		<!-- login form -->
-		<div class="row">
-			<div
-				class="col-lg-offset-3 col-lg-6 col-md-offset-2 col-md-8 col-sm-10 col-xs-12">
-				<div class="well">
-					<form method="post" th:action="@{/login/error/}" th:object="${teachermodel}">
-						<fieldset>
-							<legend> ログイン </legend>
-							<div class="form-group">
-								<label for="inputTid">教員ID:</label> <input type="text"
-									id="tid" class="form-control" placeholder="ID"
-									name="tid" th:field="*{tid}" required>
-							</div>
-							<div class="form-group">
-								<label for="inputPassword">パスワード:</label> <input type="password"
-									id="password" class="form-control" placeholder="Password"
-									name="password" th:field="*{password}" required>
-							</div>
-							<div class="form-group">
-								<button type="submit" class="btn btn-primary">ログイン</button>
-							</div>
-						</fieldset>
-					</form>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="text-center">
-				<a href="teacher.html" th:href="@{/teacher/}">ユーザ登録はこちら</a>
-			</div>
-		</div>
-	</div>
+    <link th:href="@{/css/login.css}" rel="stylesheet">
+    <form method="post" th:action="@{/login/}" th:object="${teachermodel}">
+        <h2> ログイン </h2>
+        <div class="form-group">
+            <input type="text"
+                id="tid" class="form-control" placeholder="ID"
+                name="tid" th:field="*{tid}" required>
+        </div>
+        <div class="form-group">
+            <input type="password"
+                id="password" class="form-control" placeholder="Password"
+                name="password" th:field="*{password}" required>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">ログイン</button>
+            </div>
+            <div th:if="${loginError}" class="alert alert-danger" role="alert">ログインに失敗しました。IDまたはパスワードが正しくありません。</div>
+        </div>
+    </form>
+    <div class="row">
+        <div class="text-center">
+            <a href="teacher.html" th:href="@{/teacher/}"><p>ユーザ登録はこちら</p></a>
+        </div>
+    </div>
 </body>
 </html>
+

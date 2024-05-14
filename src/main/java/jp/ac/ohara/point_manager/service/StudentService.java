@@ -22,6 +22,11 @@ public class StudentService {
     public List<StudentModel> getStudentList() {
         return repository.findAll();
     }
+    
+    // 学生一覧の取得(点数登録)
+    public List<StudentModel> getStudentList2(Integer entYear, String classNum) {
+        return repository.findByEntYearAndClassNum(entYear, classNum);
+    }
 
     // 詳細データの取得
     public StudentModel get(@NonNull Long index) {
@@ -85,6 +90,19 @@ public class StudentService {
             return repository.findAll();
         }
     }
+
+	public List<StudentModel> searchStudents2(Integer entYear, String classNum) {
+		// TODO 自動生成されたメソッド・スタブ
+		return repository.findByEntYearAndClassNum(entYear, classNum);
+		
+	}
+	
+	public List<StudentModel> getStudentEntYear(String schoolCd) {
+        // schoolCdに基づいて学生の入学年度をデータベースから取得するロジックを実装する
+        return repository.findBySchoolCd(schoolCd);
+    }
+
+	
 
 
    
