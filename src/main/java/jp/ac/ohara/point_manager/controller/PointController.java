@@ -1,5 +1,4 @@
 package jp.ac.ohara.point_manager.controller;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -14,10 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import jp.ac.ohara.point_manager.model.StudentModel;
-<<<<<<< HEAD
-=======
 import jp.ac.ohara.point_manager.model.SubjectModel;
->>>>>>> branch 'master' of https://github.com/MaoMasunaga/Groupseisaku
 import jp.ac.ohara.point_manager.model.TeacherModel;
 import jp.ac.ohara.point_manager.model.TestModel;
 import jp.ac.ohara.point_manager.repository.StudentRepository;
@@ -43,15 +39,6 @@ public class PointController {
     @Autowired
     private StudentService studentService;
  // 成績ページ
-<<<<<<< HEAD
-    @GetMapping("/point/")
-    public ModelAndView add(@AuthenticationPrincipal TeacherModel teachermodel, Model model1,TestModel test, ModelAndView model) {
-        model.addObject("test", test); 
-        model.setViewName("point");
-        model.addObject("user2",teachermodel);
-=======
->>>>>>> branch 'master' of https://github.com/MaoMasunaga/Groupseisaku
-
     
 	@GetMapping("/point/")
 	public String getAllStudents(Model model, @AuthenticationPrincipal TeacherModel teacher, @AuthenticationPrincipal StudentModel student, @AuthenticationPrincipal SubjectModel subject) {               
