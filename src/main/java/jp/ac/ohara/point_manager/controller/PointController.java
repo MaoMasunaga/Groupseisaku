@@ -1,5 +1,4 @@
 package jp.ac.ohara.point_manager.controller;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -40,10 +39,6 @@ public class PointController {
     @Autowired
     private StudentService studentService;
  // 成績ページ
-
-
-
-
     
 	@GetMapping("/point/")
 	public String getAllStudents(Model model,@AuthenticationPrincipal TeacherModel teachermodel ,@AuthenticationPrincipal TeacherModel teacher, @AuthenticationPrincipal StudentModel student, @AuthenticationPrincipal SubjectModel subject) {               
