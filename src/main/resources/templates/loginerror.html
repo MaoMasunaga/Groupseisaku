@@ -7,14 +7,13 @@
 <title>ログイン</title>
 </head>
 <body>
-	<link th:href=@{/css/login.css} rel="stylesheet">
 	<div class="container">
 		<!-- login form -->
 		<div class="row">
 			<div
 				class="col-lg-offset-3 col-lg-6 col-md-offset-2 col-md-8 col-sm-10 col-xs-12">
 				<div class="well">
-					<form method="post" th:action="@{/login/error/}" th:object="${teachermodel}">
+					<form method="post" th:action="@{/login/}" th:object="${teachermodel}">
 						<fieldset>
 							<legend> ログイン </legend>
 							<div class="form-group">
@@ -35,6 +34,7 @@
 				</div>
 			</div>
 		</div>
+		<h2><span style="color: crimson;">パスワード、またはIDが違います。</span></h2>
 		<div class="row">
 			<div class="text-center">
 				<a href="teacher.html" th:href="@{/teacher/}">ユーザ登録はこちら</a>
