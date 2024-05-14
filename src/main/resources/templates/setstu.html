@@ -62,21 +62,20 @@
     <div class="row mt-3">
       <label for="no" class="col-4 col-form-label text-end">学籍番号</label>
       <div class="col-4">
-        <input type="text" class="form-control" id="no" name="no" th:field="*{no}" th:classappend="${#fields.hasErrors('no')} ? 'is-invalid' : 'is-valid'">
+        <input type="text" class="form-control" id="no" name="no" th:field="*{no}" th:classappend="${#fields.hasErrors('no')} ? 'is-invalid' : 'is-valid'"required>
         <div th:if="${#fields.hasErrors('no')}" th:errors="*{no}" class="invalid-feedback">errors!</div>
       </div>
     </div>
-    <div class="row mt-3">
-      <label for="name" class="col-4 col-form-label text-end">名前</label>
-      <div class="col-4">
-        <input type="text" class="form-control" id="name" name="name" th:field="*{name}" th:classappend="${#fields.hasErrors('name')} ? 'is-invalid' : 'is-valid'">
-        <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="invalid-feedback">errors!</div>
-      </div>
+<div class="row mt-3">
+    <label for="name" class="col-4 col-form-label text-end">名前</label>
+    <div class="col-4">
+        <input type="text" class="form-control" id="name" name="name" required>
     </div>
+</div>
     <div class="row mt-3">
       <label for="classNum" class="col-4 col-form-label text-end">クラス番号</label>
       <div class="col-4">
-        <select name="classNum" class="form-control" id="classNum" th:field="*{classNum}" th:classappend="${#fields.hasErrors('classNum')} ? 'is-invalid' : 'is-valid'">
+        <select name="classNum" class="form-control" id="classNum" th:field="*{classNum}" th:classappend="${#fields.hasErrors('classNum')} ? 'is-invalid' : 'is-valid'" required>
 	        <option value="" selected>選択してください</option>
 	        <option value="101">101</option>
 	        <option value="102">102</option>
