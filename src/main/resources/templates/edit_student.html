@@ -28,19 +28,19 @@
     <input type="hidden" th:field="*{id}">
     <label>入学年度:</label>
     <select th:field="*{entYear}">
-      <option th:each="year : ${years}" th:value="${year}" th:text="${year}" th:selected="${year == student.entYear}">
+      <option th:each="year : ${years}" th:value="${year}" th:text="${year}" th:selected="${year == student.entYear}" required>
       </option>
     </select>
     <br>
     <label>学生番号:</label>
-    <input type="text" th:field="*{no}">
+    <input type="text" th:field="*{no}" required>
     <br>
     <label>学生名:</label>
-    <input type="text" th:field="*{name}">
+    <input type="text" th:field="*{name}" required>
     <br>
     <label>クラス番号:</label>
     <select th:field="*{classNum}">
-      <option th:each="classNum : ${classNumbers}" th:value="${classNum}" th:text="${classNum}" th:selected="${classNum == student.classNum}">
+      <option th:each="classNum : ${classNumbers}" th:value="${classNum}" th:text="${classNum}" th:selected="${classNum == student.classNum}" required>
       </option>
       </select>
       <br>

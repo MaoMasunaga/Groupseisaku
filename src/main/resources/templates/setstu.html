@@ -31,6 +31,89 @@
                 </ul>
             </nav>
         </header>
+<<<<<<< HEAD
+=======
+<div style="flex-grow: 1;"> <!-- body要素を水平方向に伸ばすためにflex-growを使用 -->
+  <a class="nav-link fw-bold py-1 px-0" href="/setstu/">新規登録</a>
+  <form class="form py-4 needs-validation h-adr" method="post" th:action="@{/setstu/}" th:object="${student}">
+    <div class="row mt-3">
+      <label for="entYear" class="col-4 col-form-label text-end">入学年度</label>
+      <div class="col-4">
+        <select name="entYear" class="form-control" id="entYear" th:field="*{entYear}" th:classappend="${#fields.hasErrors('entYear')} ? 'is-invalid' : 'is-valid'">
+	        <option value="2014">2014</option>
+	        <option value="2015">2015</option>
+	        <option value="2016">2016</option>
+	        <option value="2017">2017</option>
+	        <option value="2018">2018</option>
+	        <option value="2019">2019</option>
+	        <option value="2020">2020</option>
+	        <option value="2021">2021</option>
+	        <option value="2022">2022</option>
+	        <option value="2023">2023</option>
+	        <option value="2024" selected>2024</option>
+	        <option value="2025">2025</option>
+	        <option value="2026">2026</option>
+	        <option value="2027">2027</option>
+	        <option value="2028">2028</option>
+	        <option value="2029">2029</option>
+	        <option value="2030">2030</option>
+	        <option value="2031">2031</option>
+	        <option value="2032">2032</option>
+	        <option value="2033">2033</option>
+	        <option value="2034">2034</option>
+        </select>
+        <div th:if="${#fields.hasErrors('entYear')}" th:errors="*{entYear}" class="invalid-feedback">errors!</div>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <label for="no" class="col-4 col-form-label text-end">学籍番号</label>
+      <div class="col-4">
+        <input type="text" class="form-control" id="no" name="no" th:field="*{no}" th:classappend="${#fields.hasErrors('no')} ? 'is-invalid' : 'is-valid'"required>
+        <div th:if="${#fields.hasErrors('no')}" th:errors="*{no}" class="invalid-feedback">errors!</div>
+      </div>
+    </div>
+<div class="row mt-3">
+    <label for="name" class="col-4 col-form-label text-end">名前</label>
+    <div class="col-4">
+        <input type="text" class="form-control" id="name" name="name" required>
+    </div>
+</div>
+    <div class="row mt-3">
+      <label for="classNum" class="col-4 col-form-label text-end">クラス番号</label>
+      <div class="col-4">
+        <select name="classNum" class="form-control" id="classNum" th:field="*{classNum}" th:classappend="${#fields.hasErrors('classNum')} ? 'is-invalid' : 'is-valid'" required>
+	        <option value="" selected>選択してください</option>
+	        <option value="101">101</option>
+	        <option value="102">102</option>
+	        <option value="103">103</option>
+	        <option value="104">104</option>
+	        <option value="105">105</option>
+	        <option value="201">201</option>
+	        <option value="202">202</option>
+	        <option value="203">203</option>
+	        <option value="204">204</option>
+	        <option value="205">205</option>
+	        <option value="301">301</option>
+	        <option value="302">302</option>
+	        <option value="303">303</option>
+	        <option value="304">304</option>
+       		<option value="305">305</option>
+       </select>
+        <div th:if="${#fields.hasErrors('classNum')}" th:errors="*{classNum}" class="invalid-feedback">errors!</div>
+      </div>
+    </div>
+    
+    
+    <div class="my-4">
+      <input type="submit" class="btn btn-primary" value="送信">
+      <footer class="my-5 pt-5 text-body-secondary text-center text-small">
+      </footer>
+    </div>
+  </form>
+  <a href="/">トップに戻る</a>
+  </div>
+    </body>
+>>>>>>> branch 'master' of https://github.com/MaoMasunaga/Groupseisaku
 
         <div style="flex-grow: 1;">
             <a class="nav-link fw-bold py-1 px-0" href="/setstu/">新規登録</a>
