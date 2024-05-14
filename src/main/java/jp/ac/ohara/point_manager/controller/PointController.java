@@ -41,7 +41,7 @@ public class PointController {
  // 成績ページ
     
 	@GetMapping("/point/")
-	public String getAllStudents(Model model, @AuthenticationPrincipal TeacherModel teacher, @AuthenticationPrincipal StudentModel student, @AuthenticationPrincipal SubjectModel subject) {               
+	public String getAllStudents(Model model,@AuthenticationPrincipal TeacherModel teachermodel ,@AuthenticationPrincipal TeacherModel teacher, @AuthenticationPrincipal StudentModel student, @AuthenticationPrincipal SubjectModel subject) {               
 		TestModel testmodel = new TestModel();
 		String schoolCd = teacher.getSchoolCd();               
 		List<TestModel> students = testService.getAllStudentsBySchoolCd(schoolCd);
@@ -50,7 +50,8 @@ public class PointController {
 		List<StudentModel> studentList = studentService.getStudentEntYear(schoolCd);
 		model.addAttribute("student", studentList);
 		List<SubjectModel> subjectCd = subjectService.getAllSubjectBySchoolCd(schoolCd);
-		model.addAttribute("subjectCd", subjectCd);               
+		model.addAttribute("subjectCd", subjectCd);  
+		model.addAttribute("user2",teachermodel);
 		return "point"; 
 	}
 

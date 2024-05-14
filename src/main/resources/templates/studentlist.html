@@ -5,11 +5,31 @@
     <meta charset="UTF-8">
     <title>学生管理</title>
     <link th:href="@{/css/style.css}" rel="stylesheet">
+    <style>
+        .user-info {
+            font-size: small;
+            float: right;
+        }
+        .btn {
+            margin-right: 5px;
+        }
+        .btn-edit {
+            background-color: #ffc107;
+            color: #000;
+        }
+        .btn-delete {
+            background-color: #dc3545;
+            color: #fff;
+        }
+    </style>
 </head>
 
 <body>
-    <h1 style="background-color:rgb(128, 255, 255)">得点管理システム</h1>
-    <span th:text="ログイン中のユーザー + ${user2.name}"></span>
+    <h1 style="background-color:rgb(128, 255, 255); position: relative;">
+        得点管理システム
+        <span th:text="'ログイン中のユーザー: ' + ${user2.name}" class="user-info"></span>
+    </h1>
+
     <div style="display: flex;">
         <header class="mb-auto" style="padding: 10px;">
             <nav class="nav nav-masthead justify-content-center float-md-end">
@@ -39,7 +59,7 @@
                 <input type="checkbox" id="isAttend" name="isAttend" value="true">
                 <label for="isAttend">在学中</label>
 
-                <button type="button" onclick="submitForm()">検索</button>
+                <button type="submit">検索</button>
             </form>
 
             <div th:if="${studentList != null}">
@@ -110,3 +130,4 @@
 </body>
 
 </html>
+

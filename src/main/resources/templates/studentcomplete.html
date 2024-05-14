@@ -1,21 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
     <title>学生管理</title>
-    <link th:href=@{/css/style.css} rel="stylesheet">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <style>
+        .user-info {
+            font-size: small;
+            float: right;
+        }
+    </style>
 </head>
 
 <body>
-    <h1 style="background-color:rgb(128, 255, 255)">得点管理システム</h1>
-<<<<<<< HEAD
-    <span th:text="ログイン中のユーザー + ${user2.name}"></span>
-=======
-    
->>>>>>> branch 'master' of https://github.com/MaoMasunaga/Groupseisaku
-<link th:href=@{/css/style.css} rel="stylesheet">
-<div style="display: flex;">
+    <h1 style="background-color:rgb(128, 255, 255); position: relative;">
+        得点管理システム
+        <span th:text="'ログイン中のユーザー: ' + ${user2.name}" class="user-info"></span>
+    </h1>
+
+    <div style="display: flex;">
         <header class="mb-auto" style="padding: 10px;">
             <nav class="nav nav-masthead justify-content-center float-md-end">
                 <ul>
@@ -29,11 +33,14 @@
                 </ul>
             </nav>
         </header>
-<div style="flex-grow: 1;"> <!-- body要素を水平方向に伸ばすためにflex-growを使用 -->
-<p>登録が完了しました</p>
-		<a href="/">戻る</a>
-		<a href="/studentlist/">学生一覧</a>
-</div>
-    </body>
+
+        <div style="flex-grow: 1; padding: 20px;">
+            <p>登録が完了しました</p>
+            <a href="/" class="btn btn-primary">戻る</a>
+            <a href="/studentlist/" class="btn btn-secondary">学生一覧</a>
+        </div>
+    </div>
+</body>
 
 </html>
+
