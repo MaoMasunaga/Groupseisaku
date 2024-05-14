@@ -1,6 +1,8 @@
 package jp.ac.ohara.point_manager.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,8 +28,10 @@ public class TeacherController {
 
     // 先生登録ページの表示
     @GetMapping("/teacher/")
-    public String showTeacherForm(Model model) {
+    public String showTeacherForm(@AuthenticationPrincipal UserDetails user, Model model) {
         model.addAttribute("teacher", new TeacherModel());
+        model.addAttribute("user2",user);
+
         return "teacher";
     }
     
@@ -51,8 +55,10 @@ public class TeacherController {
 
     // 先生リストの表示
     @GetMapping("/teacherlist/")
-    public String showTeacherList(Model model) {
+    public String showTeacherList(@AuthenticationPrincipal UserDetails user,Model model) {
         model.addAttribute("teacherList", teacherService.getTeacherList());
+        model.addAttribute("user2",user);
+    
         return "teacherlist";
     }
 
@@ -66,9 +72,11 @@ public class TeacherController {
 
     // 先生情報の編集ページの表示
     @GetMapping("/teacherlist/edit/{id}")
-    public String showEditTeacherForm(@PathVariable Long id, Model model) {
+    public String showEditTeacherForm(@AuthenticationPrincipal UserDetails user, Model model1, @PathVariable Long id, Model model) {
         TeacherModel teacher = teacherService.getTeacherById(id);
         model.addAttribute("teacher", teacher);
+        model1.addAttribute("user2",user);
+
         return "edit_teacher";
     }
 }
