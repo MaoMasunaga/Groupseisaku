@@ -14,10 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import jp.ac.ohara.point_manager.model.StudentModel;
-<<<<<<< HEAD
-=======
 import jp.ac.ohara.point_manager.model.SubjectModel;
->>>>>>> branch 'master' of https://github.com/MaoMasunaga/Groupseisaku
 import jp.ac.ohara.point_manager.model.TeacherModel;
 import jp.ac.ohara.point_manager.model.TestModel;
 import jp.ac.ohara.point_manager.repository.StudentRepository;
@@ -43,18 +40,13 @@ public class PointController {
     @Autowired
     private StudentService studentService;
  // 成績ページ
-<<<<<<< HEAD
-    @GetMapping("/point/")
-    public ModelAndView add(@AuthenticationPrincipal TeacherModel teachermodel, Model model1,TestModel test, ModelAndView model) {
-        model.addObject("test", test); 
-        model.setViewName("point");
-        model.addObject("user2",teachermodel);
-=======
->>>>>>> branch 'master' of https://github.com/MaoMasunaga/Groupseisaku
+
+
+
 
     
 	@GetMapping("/point/")
-	public String getAllStudents(Model model, @AuthenticationPrincipal TeacherModel teacher, @AuthenticationPrincipal StudentModel student, @AuthenticationPrincipal SubjectModel subject) {               
+	public String getAllStudents(Model model,@AuthenticationPrincipal TeacherModel teachermodel ,@AuthenticationPrincipal TeacherModel teacher, @AuthenticationPrincipal StudentModel student, @AuthenticationPrincipal SubjectModel subject) {               
 		TestModel testmodel = new TestModel();
 		String schoolCd = teacher.getSchoolCd();               
 		List<TestModel> students = testService.getAllStudentsBySchoolCd(schoolCd);
@@ -63,7 +55,8 @@ public class PointController {
 		List<StudentModel> studentList = studentService.getStudentEntYear(schoolCd);
 		model.addAttribute("student", studentList);
 		List<SubjectModel> subjectCd = subjectService.getAllSubjectBySchoolCd(schoolCd);
-		model.addAttribute("subjectCd", subjectCd);               
+		model.addAttribute("subjectCd", subjectCd);  
+		model.addAttribute("user2",teachermodel);
 		return "point"; 
 	}
 
