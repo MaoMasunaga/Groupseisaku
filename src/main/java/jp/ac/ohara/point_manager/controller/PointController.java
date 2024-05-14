@@ -2,7 +2,6 @@ package jp.ac.ohara.point_manager.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import jp.ac.ohara.point_manager.model.StudentModel;
+import jp.ac.ohara.point_manager.model.TeacherModel;
 import jp.ac.ohara.point_manager.model.TestModel;
 import jp.ac.ohara.point_manager.repository.StudentRepository;
 import jp.ac.ohara.point_manager.repository.TestRepository;
@@ -26,10 +26,10 @@ public class PointController {
 
  // 成績ページ
     @GetMapping("/point/")
-    public ModelAndView add(@AuthenticationPrincipal UserDetails user, Model model1,TestModel test, ModelAndView model) {
+    public ModelAndView add(@AuthenticationPrincipal TeacherModel teachermodel, Model model1,TestModel test, ModelAndView model) {
         model.addObject("test", test); 
         model.setViewName("point");
-        model1.addAttribute("user2",user);
+        model.addObject("user2",teachermodel);
 
 
         return model;
