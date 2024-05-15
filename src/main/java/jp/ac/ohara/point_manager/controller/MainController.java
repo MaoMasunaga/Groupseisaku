@@ -83,8 +83,9 @@ public class MainController {
     //Form送信
     @PostMapping("/setstu/")
     public String student(@Validated @ModelAttribute @NonNull StudentModel student, RedirectAttributes result, ModelAndView model,
-            RedirectAttributes redirectAttributes) {
+            RedirectAttributes redirectAttributes,@AuthenticationPrincipal  TeacherModel user) {
         try {
+        	student.setSchoolCd(user.getSchoolCd());
             this.studentService.save(student);
             redirectAttributes.addFlashAttribute("exception", "");
 
@@ -152,7 +153,8 @@ public class MainController {
             @RequestParam(value = "entYear", required = false) Integer entYear,
             @RequestParam(value = "classNum", required = false) String classNum,
             @RequestParam(value = "isAttend", required = false) Boolean isAttend,
-            Model model) {
+            Model model,@AuthenticationPrincipal TeacherModel teachermodel) {
+    	model.addAttribute("user2",teachermodel);
         // 条件がnullでない場合のみ検索に使用する
         List<StudentModel> students;
         if (entYear != null || classNum != null || isAttend != null) {

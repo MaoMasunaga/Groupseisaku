@@ -29,7 +29,6 @@
         得点管理システム
         <span th:text="'ログイン中のユーザー: ' + ${user2.name}" class="user-info"></span>
     </h1>
-
     <div style="display: flex;">
         <header class="mb-auto" style="padding: 10px;">
             <nav class="nav nav-masthead justify-content-center float-md-end">
@@ -40,7 +39,6 @@
                     <li><a class="nav-link fw-bold py-1 px-0" href="/subject/">科目登録</a></li>
                     <li><a class="nav-link fw-bold py-1 px-0" href="#">成績参照</a></li>
                     <li><a class="nav-link fw-bold py-1 px-0" href="/subjectlist/">科目管理</a></li>
-                    <li><a class="nav-link fw-bold py-1 px-0" href="/logout/">ログアウト</a></li>
                 </ul>
             </nav>
         </header>
@@ -59,7 +57,7 @@
                 <input type="checkbox" id="isAttend" name="isAttend" value="true">
                 <label for="isAttend">在学中</label>
 
-                <button type="submit">検索</button>
+                <button type="button" onclick="submitForm()">検索</button>
             </form>
 
             <div th:if="${studentList != null}">
