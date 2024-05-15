@@ -17,7 +17,6 @@ import jp.ac.ohara.point_manager.model.SubjectModel;
 import jp.ac.ohara.point_manager.model.TeacherModel;
 import jp.ac.ohara.point_manager.model.TestModel;
 import jp.ac.ohara.point_manager.repository.StudentRepository;
-import jp.ac.ohara.point_manager.repository.SubjectRepository;
 import jp.ac.ohara.point_manager.repository.TestRepository;
 import jp.ac.ohara.point_manager.service.StudentService;
 import jp.ac.ohara.point_manager.service.SubjectService;
@@ -32,8 +31,6 @@ public class PointController {
     private StudentRepository studentRepository;
     @Autowired
     private TestService testService;
-    @Autowired
-    private SubjectRepository subjectRepository;
     @Autowired
     private SubjectService subjectService;
     @Autowired

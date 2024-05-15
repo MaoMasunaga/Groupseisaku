@@ -29,7 +29,7 @@ public class SubjectController {
 	
 	
 
-	// 成績登録ページ
+	// 科目登録ページ
 	@GetMapping("/subject/")
 	public ModelAndView add(@AuthenticationPrincipal TeacherModel teachermodel, Model model1, SubjectModel subject, ModelAndView model) {
 		  model.addObject("subject", subject); 
@@ -54,12 +54,12 @@ public class SubjectController {
 	    } catch (Exception e) {
 	        redirectAttributes.addFlashAttribute("exception", e.getMessage());
 	    }
-	    return "redirect:/";
+	    return "redirect:/subjectlist/";
 
 	  }
 	
 
-	//学生・成績・出席リスト表示・出席詳細表示
+	//科目詳細表示
 	@GetMapping("/subjectlist/")
 	public String add3(@AuthenticationPrincipal TeacherModel teachermodel,Model model) {
 	  System.out.println(subjectService.getSubjectList().toString());
@@ -70,14 +70,14 @@ public class SubjectController {
 	    return "subjectlist";
 	}
 
-	// 成績情報の削除
+	// 科目情報の削除
 	@PostMapping("/subject/delete/{id}")
 	public String deleteSubject(@PathVariable Long id) {
 	    subjectService.delete(id);
 	    	return "redirect:/subjectlist/";
 	}
 		
-		// 成績情報の編集ページ
+		// 科目情報の編集ページ
 	@GetMapping("/subjectlist/edit/{id}")
 	public String editSubject(@AuthenticationPrincipal TeacherModel teachermodel,@PathVariable Long id, Model model) {
 	    SubjectModel subject = subjectService.getSubjectById(id);
@@ -89,7 +89,7 @@ public class SubjectController {
 
 	}
 	
-    // 情報の更新
+    // 科目情報の更新
     @PostMapping("/subjectlist/update/{id}")
     public String updateSubject(@PathVariable Long id, @Validated @ModelAttribute @NonNull SubjectModel subject, RedirectAttributes redirectAttributes,@AuthenticationPrincipal TeacherModel user) {
         subject.setId(id);
@@ -103,6 +103,13 @@ public class SubjectController {
         
 
 
-        return "redirect:/subjectlist/";
+        return "redirect:/subjectfini/";
     }
+    
+	@GetMapping("/subjectfini/")
+	public String add(@AuthenticationPrincipal TeacherModel teachermodel,Model model) {
+	    model.addAttribute("user2",teachermodel);
+	    return "subjectfini";
+	}
+   
 }

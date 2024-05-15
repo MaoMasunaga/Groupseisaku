@@ -134,7 +134,7 @@ public class MainController {
         
 
 
-        return "redirect:/studentlist/";
+        return "redirect:/studentfini/";
     }
     
     @GetMapping("/studentlist/search")
@@ -173,5 +173,10 @@ public class MainController {
         return classNumbers;
     }
 
+	@GetMapping("/studentfini/")
+	public String add(@AuthenticationPrincipal TeacherModel teachermodel,Model model) {
+	    model.addAttribute("user2",teachermodel);
+	    return "studentfini";
+	}
    
 }
