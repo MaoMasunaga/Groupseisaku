@@ -90,4 +90,21 @@ public class SubjectController {
 	    return "edit_subject";
 
 	}
+	
+    // 情報の更新
+    @PostMapping("/subjectlist/update/{id}")
+    public String updateSubject(@PathVariable Long id, @Validated @ModelAttribute @NonNull SubjectModel subject, RedirectAttributes redirectAttributes,@AuthenticationPrincipal TeacherModel user) {
+        subject.setId(id);
+        try {
+        	subject.setSchoolCd(user.getSchoolCd());
+            subjectService.saveOrUpdateSubject(subject);
+            redirectAttributes.addFlashAttribute("exception", "");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("exception", e.getMessage());
+        }
+        
+
+
+        return "redirect:/subjectlist/";
+    }
 }

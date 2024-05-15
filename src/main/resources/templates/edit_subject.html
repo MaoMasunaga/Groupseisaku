@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>学生管理</title>
+    <link th:href=@{/css/style.css} rel="stylesheet">
+</head>
+<link th:href="@{/css/style.css}" rel="stylesheet">
+    <style>
+        .user-info {
+            font-size: small;
+            float: right;
+        }
+    </style>
+    <script>
+        function submitForm() {
+            var form = document.getElementById('searchForm');
+            var entYear = form.querySelector('select[name="entYear"]').value;
+            var classNum = form.querySelector('select[name="classNum"]').value;
+
+            var url = '/point/search?';
+            if (entYear !== '') {
+                url += 'entYear=' + entYear + '&';
+            }
+            if (classNum !== '') {
+                url += 'classNum=' + classNum + '&';
+            }
+
+            window.location.href = url;
+        }
+    </script>
+</head>
+
+<body>
+    <h1 style="background-color:rgb(128, 255, 255); position: relative;">
+        得点管理システム
+        <span th:text="'ログイン中のユーザー: ' + ${user2.name}" class="user-info"></span>
+    </h1>
+    
+    <div style="display: flex;">
+        <header class="mb-auto" style="padding: 10px;">
+            <nav class="nav nav-masthead justify-content-center float-md-end">
+                <ul>
+                    <li><a class="nav-link fw-bold py-1 px-0" aria-current="page" href="/">メニュー</a></li>
+                    <li><a class="nav-link fw-bold py-1 px-0 active" href="/studentlist/">学生管理</a></li>
+                    <li><a class="nav-link fw-bold py-1 px-0" href="/point/">成績登録</a></li>
+                    <li><a class="nav-link fw-bold py-1 px-0" href="/subject/">科目登録</a></li>
+                    <li><a class="nav-link fw-bold py-1 px-0" href="#">成績参照</a></li>
+                    <li><a class="nav-link fw-bold py-1 px-0" href="/subjectlist/">科目管理</a></li>
+                    <li><a class="nav-link fw-bold py-1 px-0" href="/logout/">ログアウト</a></li>
+                </ul>
+            </nav>
+        </header>
+ <link th:href=@{/css/style.css} rel="stylesheet">
+  <form th:object="${subject}" th:action="@{/subjectlist/update/{id}(id=${subject.id})}" method="post">
+    <input type="hidden" th:field="*{id}">
+    <label>科目コード:</label>
+    <input type="text" th:field="*{cd}" required>
+    <br>
+    <label>科目名:</label>
+    <input type="text" th:field="*{name}" required>
+    <br>
+
+    <button type="submit">更新する</button>
+  </form>
+</body>
+
+</html>
