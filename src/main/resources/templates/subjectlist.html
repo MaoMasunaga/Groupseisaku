@@ -4,14 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <title>学生管理</title>
-    <link th:href=@{/css/style.css} rel="stylesheet">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+        <style>
+        .user-info {
+			font-size: small;
+            float: right;
+        }
+    </style>
 </head>
 
 <body>
-    <h1 style="background-color:rgb(128, 255, 255)">得点管理システム</h1>
-    <span th:text="ログイン中のユーザー + ${user2.username}"></span>
-<link th:href=@{/css/style.css} rel="stylesheet">
-<div style="display: flex;">
+    <h1 style="background-color:rgb(128, 255, 255); position: relative;">
+        得点管理システム
+        <span th:text="'ログイン中のユーザー: ' + ${user2.name}" class="user-info"></span> 
+    </h1>
+ 
+    <div style="display: flex;">
         <header class="mb-auto" style="padding: 10px;">
             <nav class="nav nav-masthead justify-content-center float-md-end">
                 <ul>
@@ -26,39 +34,40 @@
             </nav>
         </header>
         <div style="flex-grow: 1;"> <!-- body要素を水平方向に伸ばすためにflex-growを使用 -->
-    <div th:if="${subjectList != null}">
-		<h2>科目管理</h2>
-		<a class="nav-link fw-bold py-1 px-0" href="/subject/">新規登録</a>
-       
-        <table>      <thead>
-                <tr>
-                    <th>科目コード</th>
-                    <th>科目名</th>
-                    
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="subject : ${subjectList}">
-                    <td th:text="${subject.cd}"></td>
-                    <td th:text="${subject.name}"></td>
-                    
-                    
-                    <td>
-						<a th:href="@{/subjectlist/edit/{id}(id=${subject.id})}" class="btn btn-edit">編集</a>
-                        <form th:action="@{/subject/delete/{id}(id=${subject.id})}" method="post" style="display: inline;">
-                            <input type="hidden" name="_method" value="delete">
-                            <button type="submit" class="btn btn-delete">削除</button>
-                        </form>
-                        
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+            <div th:if="${subjectList != null}">
+                <h2>科目管理</h2>
+                <a class="nav-link fw-bold py-1 px-0" href="/subject/">新規登録</a>
+               
+                <table>
+                    <thead>
+                        <tr>
+                            <th>科目コード</th>
+                            <th>科目名</th>
+                            <th>操作</th> <!-- 操作列を追加 -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="subject : ${subjectList}">
+                            <td th:text="${subject.cd}"></td>
+                            <td th:text="${subject.name}"></td>
+                            <td>
+                                <a th:href="@{/subjectlist/edit/{id}(id=${subject.id})}" class="btn btn-edit">編集</a>
+                                <form th:action="@{/subject/delete/{id}(id=${subject.id})}" method="post" style="display: inline;">
+                                    <input type="hidden" name="_method" value="delete">
+                                    <button type="submit" class="btn btn-delete">削除</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div th:unless="${subjectList != null}">
+                <p>データなし</p>
+            </div>
+        </div>
     </div>
-    <div th:unless="${subjectList != null}">
-        <p>データなし</p>
-    </div>
-</div>
-    </body>
+</body>
 
 </html>
+
+

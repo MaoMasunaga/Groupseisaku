@@ -1,19 +1,23 @@
 <!DOCTYPE html>
-<html>
-
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>学生管理</title>
-    <link th:href=@{/css/style.css} rel="stylesheet">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <style>
+        .user-info {
+            font-size: small;
+            float: right;
+        }
+    </style>
 </head>
-
 <body>
-    <h1 style="background-color:rgb(128, 255, 255)">得点管理システム</h1>
-    <div id="logout">
-            <span th:text="ログイン中のユーザー + ${user2.username}"></span>
-        </div>
-<link th:href=@{/css/style.css} rel="stylesheet">
-<div style="display: flex;">
+    <h1 style="background-color:rgb(128, 255, 255); position: relative;">
+        得点管理システム
+        <span th:text="'ログイン中のユーザー: ' + ${user2.name}" class="user-info"></span>
+    </h1>
+
+    <div style="display: flex;">
         <header class="mb-auto" style="padding: 10px;">
             <nav class="nav nav-masthead justify-content-center float-md-end">
                 <ul>
@@ -27,6 +31,7 @@
                 </ul>
             </nav>
         </header>
+
 <div style="flex-grow: 1;"> <!-- body要素を水平方向に伸ばすためにflex-growを使用 -->
   <a class="nav-link fw-bold py-1 px-0" href="/setstu/">新規登録</a>
   <form class="form py-4 needs-validation h-adr" method="post" th:action="@{/setstu/}" th:object="${student}">
@@ -62,21 +67,20 @@
     <div class="row mt-3">
       <label for="no" class="col-4 col-form-label text-end">学籍番号</label>
       <div class="col-4">
-        <input type="text" class="form-control" id="no" name="no" th:field="*{no}" th:classappend="${#fields.hasErrors('no')} ? 'is-invalid' : 'is-valid'">
+        <input type="text" class="form-control" id="no" name="no" th:field="*{no}" th:classappend="${#fields.hasErrors('no')} ? 'is-invalid' : 'is-valid'"required>
         <div th:if="${#fields.hasErrors('no')}" th:errors="*{no}" class="invalid-feedback">errors!</div>
       </div>
     </div>
-    <div class="row mt-3">
-      <label for="name" class="col-4 col-form-label text-end">名前</label>
-      <div class="col-4">
-        <input type="text" class="form-control" id="name" name="name" th:field="*{name}" th:classappend="${#fields.hasErrors('name')} ? 'is-invalid' : 'is-valid'">
-        <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="invalid-feedback">errors!</div>
-      </div>
+<div class="row mt-3">
+    <label for="name" class="col-4 col-form-label text-end">名前</label>
+    <div class="col-4">
+        <input type="text" class="form-control" id="name" name="name" required>
     </div>
+</div>
     <div class="row mt-3">
       <label for="classNum" class="col-4 col-form-label text-end">クラス番号</label>
       <div class="col-4">
-        <select name="classNum" class="form-control" id="classNum" th:field="*{classNum}" th:classappend="${#fields.hasErrors('classNum')} ? 'is-invalid' : 'is-valid'">
+        <select name="classNum" class="form-control" id="classNum" th:field="*{classNum}" th:classappend="${#fields.hasErrors('classNum')} ? 'is-invalid' : 'is-valid'" required>
 	        <option value="" selected>選択してください</option>
 	        <option value="101">101</option>
 	        <option value="102">102</option>
@@ -109,4 +113,5 @@
   </div>
     </body>
 
-</html>
+
+

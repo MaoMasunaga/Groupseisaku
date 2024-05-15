@@ -7,7 +7,6 @@ import java.util.stream.IntStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
@@ -54,18 +53,28 @@ public class MainController {
     }
 
     @GetMapping("/")
-    public String index(@AuthenticationPrincipal UserDetails user,Model model) {
-    	model.addAttribute("user2",user);
+    public String index(@AuthenticationPrincipal TeacherModel teachermodel,Model model) {
+    	model.addAttribute("user2",teachermodel);
 
     	return "index";
     }
 
     // 学生登録ページ
     @GetMapping("/setstu/")
-    public ModelAndView add(@AuthenticationPrincipal UserDetails user, Model model1,StudentModel student, ModelAndView model) {
+    public ModelAndView add(@AuthenticationPrincipal TeacherModel teachermodel, Model model1,StudentModel student, ModelAndView model) {
         model.addObject("student", student); 
         model.setViewName("setstu");
-        model1.addAttribute("user2",user);
+        model.addObject("user2",teachermodel);
+       
+
+        return model;
+    }
+    
+    @GetMapping("/studentcomplete/")
+    public ModelAndView studentcomplete(@AuthenticationPrincipal TeacherModel teachermodel, Model model1,StudentModel student, ModelAndView model) {
+        model.addObject("student", student); 
+        model.setViewName("studentcomplete");
+        model.addObject("user2",teachermodel);
        
 
         return model;
@@ -82,15 +91,15 @@ public class MainController {
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("exception", e.getMessage());
         }
-        return "studentcomplete";
+        return "redirect:/studentcomplete/";
 
     }
 
     //学生・成績・出席リスト表示・出席詳細表示
     @GetMapping("/studentlist/")
-    public String add3(@AuthenticationPrincipal UserDetails user,Model model) {
+    public String add3(@AuthenticationPrincipal TeacherModel teachermodel,Model model) {
         model.addAttribute("studentList", studentService.getStudentList());
-        model.addAttribute("user2",user);
+        model.addAttribute("user2",teachermodel);
 
         return "studentlist";
     }
@@ -104,7 +113,7 @@ public class MainController {
 
     // 学生情報の編集ページ
     @GetMapping("/studentlist/edit/{id}")
-    public String editStudent(@AuthenticationPrincipal UserDetails user,@PathVariable Long id, Model model) {
+    public String editStudent(@AuthenticationPrincipal TeacherModel teachermodel,@PathVariable Long id, Model model) {
         StudentModel student = studentService.getStudentById(id);
         model.addAttribute("student", student);
         
@@ -116,7 +125,7 @@ public class MainController {
         List<String> classNumbers = Arrays.asList("101", "102", "103", "104", "105", "201", "202", "203", "204", "205", "301", "302", "303", "304", "305");
         model.addAttribute("classNumbers", classNumbers);
         
-        model.addAttribute("user2",user);
+        model.addAttribute("user2",teachermodel);
 
         
         return "edit_student";
@@ -124,7 +133,7 @@ public class MainController {
 
     // 学生情報の更新
     @PostMapping("/studentlist/update/{id}")
-    public String updateStudent(@AuthenticationPrincipal UserDetails user, Model model, @PathVariable Long id, @Validated @ModelAttribute @NonNull StudentModel student, RedirectAttributes redirectAttributes) {
+    public String updateStudent(@PathVariable Long id, @Validated @ModelAttribute @NonNull StudentModel student, RedirectAttributes redirectAttributes) {
         student.setId(id);
         try {
             studentService.saveOrUpdateStudent(student);
@@ -132,10 +141,10 @@ public class MainController {
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("exception", e.getMessage());
         }
-        model.addAttribute("user2",user);
+        
 
 
-        return "redirect:/studentlist/";
+        return "redirect:/studentfini/";
     }
     
     @GetMapping("/studentlist/search")
@@ -174,5 +183,10 @@ public class MainController {
         return classNumbers;
     }
 
+	@GetMapping("/studentfini/")
+	public String add(@AuthenticationPrincipal TeacherModel teachermodel,Model model) {
+	    model.addAttribute("user2",teachermodel);
+	    return "studentfini";
+	}
    
 }

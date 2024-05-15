@@ -6,9 +6,38 @@
     <title>学生管理</title>
     <link th:href=@{/css/style.css} rel="stylesheet">
 </head>
+<link th:href="@{/css/style.css}" rel="stylesheet">
+    <style>
+        .user-info {
+            font-size: small;
+            float: right;
+        }
+    </style>
+    <script>
+        function submitForm() {
+            var form = document.getElementById('searchForm');
+            var entYear = form.querySelector('select[name="entYear"]').value;
+            var classNum = form.querySelector('select[name="classNum"]').value;
+
+            var url = '/point/search?';
+            if (entYear !== '') {
+                url += 'entYear=' + entYear + '&';
+            }
+            if (classNum !== '') {
+                url += 'classNum=' + classNum + '&';
+            }
+
+            window.location.href = url;
+        }
+    </script>
+</head>
 
 <body>
-    <h1 style="background-color:rgb(128, 255, 255)">得点管理システム</h1>
+    <h1 style="background-color:rgb(128, 255, 255); position: relative;">
+        得点管理システム
+        <span th:text="'ログイン中のユーザー: ' + ${user2.name}" class="user-info"></span>
+    </h1>
+    
     <div style="display: flex;">
         <header class="mb-auto" style="padding: 10px;">
             <nav class="nav nav-masthead justify-content-center float-md-end">
@@ -28,19 +57,19 @@
     <input type="hidden" th:field="*{id}">
     <label>入学年度:</label>
     <select th:field="*{entYear}">
-      <option th:each="year : ${years}" th:value="${year}" th:text="${year}" th:selected="${year == student.entYear}">
+      <option th:each="year : ${years}" th:value="${year}" th:text="${year}" th:selected="${year == student.entYear}" required>
       </option>
     </select>
     <br>
     <label>学生番号:</label>
-    <input type="text" th:field="*{no}">
+    <input type="text" th:field="*{no}" required>
     <br>
     <label>学生名:</label>
-    <input type="text" th:field="*{name}">
+    <input type="text" th:field="*{name}" required>
     <br>
     <label>クラス番号:</label>
     <select th:field="*{classNum}">
-      <option th:each="classNum : ${classNumbers}" th:value="${classNum}" th:text="${classNum}" th:selected="${classNum == student.classNum}">
+      <option th:each="classNum : ${classNumbers}" th:value="${classNum}" th:text="${classNum}" th:selected="${classNum == student.classNum}" required>
       </option>
       </select>
       <br>

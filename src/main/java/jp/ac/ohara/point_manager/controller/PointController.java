@@ -1,5 +1,4 @@
 package jp.ac.ohara.point_manager.controller;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -20,7 +19,6 @@ import jp.ac.ohara.point_manager.model.SubjectModel;
 import jp.ac.ohara.point_manager.model.TeacherModel;
 import jp.ac.ohara.point_manager.model.TestModel;
 import jp.ac.ohara.point_manager.repository.StudentRepository;
-import jp.ac.ohara.point_manager.repository.SubjectRepository;
 import jp.ac.ohara.point_manager.repository.TestRepository;
 import jp.ac.ohara.point_manager.service.StudentService;
 import jp.ac.ohara.point_manager.service.SubjectService;
@@ -36,30 +34,25 @@ public class PointController {
     @Autowired
     private TestService testService;
     @Autowired
-    private SubjectRepository subjectRepository;
-    @Autowired
     private SubjectService subjectService;
     @Autowired
     private StudentService studentService;
-
-    @GetMapping("/point/")
-    public String getAllStudents(Model model, @AuthenticationPrincipal TeacherModel teacher) {
-        if (teacher == null) {
-            // ユーザーが認証されていない場合の処理
-            return "redirect:/login";
-        }
-
-        String schoolCd = teacher.getSchoolCd();
-        List<StudentModel> studentList = studentService.getStudentEntYear(schoolCd);
-        List<SubjectModel> subjectList = subjectService.getAllSubjectBySchoolCd(schoolCd);
-        List<TestModel> tests = testService.getAllStudentsBySchoolCd(schoolCd);
-
-        model.addAttribute("user", teacher); // userとしてテンプレートに追加
-        model.addAttribute("studentList", studentList);
-        model.addAttribute("subjectList", subjectList);
-        model.addAttribute("tests", tests);
-        return "point";
-    }
+    
+    
+	@GetMapping("/point/")
+	public String getAllStudents(Model model,@AuthenticationPrincipal TeacherModel teachermodel ,@AuthenticationPrincipal TeacherModel teacher, @AuthenticationPrincipal StudentModel student, @AuthenticationPrincipal SubjectModel subject) {               
+		TestModel testmodel = new TestModel();
+		String schoolCd = teacher.getSchoolCd();               
+		List<TestModel> students = testService.getAllStudentsBySchoolCd(schoolCd);
+		model.addAttribute("tests", students);
+		model.addAttribute("testmodel",testmodel);
+		List<StudentModel> studentList = studentService.getStudentEntYear(schoolCd);
+		model.addAttribute("student", studentList);
+		List<SubjectModel> subjectCd = subjectService.getAllSubjectBySchoolCd(schoolCd);
+		model.addAttribute("subjectCd", subjectCd);  
+		model.addAttribute("user2",teachermodel);
+		return "point"; 
+	}
 
 
     @ModelAttribute("subjects")
@@ -98,7 +91,7 @@ public class PointController {
             @RequestParam(value = "entYear", required = false) Integer entYear,
             @RequestParam(value = "classNum", required = false) String classNum,
             Model model,
-            @AuthenticationPrincipal TeacherModel teacher) {
+            @AuthenticationPrincipal TeacherModel teacher,@AuthenticationPrincipal TeacherModel teachermodel) {
 
         if (teacher == null) {
             return "redirect:/login";
@@ -120,6 +113,7 @@ public class PointController {
         model.addAttribute("user", teacher); // userとしてテンプレートに追加
         model.addAttribute("studentList", students);
         model.addAttribute("subjectList", subjectList);
+        model.addAttribute("user2",teachermodel);
 
         return "point";
     }
@@ -165,6 +159,7 @@ public class PointController {
 
 }
 
+//複数人登録途中
 
 //package jp.ac.ohara.point_manager.controller;
 //

@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <title>学生管理</title>
     <link th:href="@{/css/style.css}" rel="stylesheet">
+    <style>
+        .user-info {
+            font-size: small;
+            float: right;
+        }
+    </style>
     <script>
         function submitForm() {
             var form = document.getElementById('searchForm');
@@ -22,8 +28,15 @@
         }
     </script>
 </head>
+
 <body>
-    <h1 style="background-color:rgb(128, 255, 255)">得点管理システム</h1>
+
+
+    <h1 style="background-color:rgb(128, 255, 255); position: relative;">
+        得点管理システム
+        <span th:text="'ログイン中のユーザー: ' + ${user2.name}" class="user-info"></span>
+    </h1>
+
     <div style="display: flex;">
         <header class="mb-auto" style="padding: 10px;">
             <nav class="nav nav-masthead justify-content-center float-md-end">
@@ -38,8 +51,10 @@
                 </ul>
             </nav>
         </header>
+
         <div style="flex-grow: 1;">
             <h2>成績管理</h2>
+
 
             <p th:if="${param.error}">
                 <span th:text="${param.error}"></span>
@@ -49,6 +64,10 @@
             </p>
 
             <form id="searchForm" class="form py-4 needs-validation h-adr" method="get" th:action="@{/point/search}">
+
+          
+
+
                 <select name="entYear">
                     <option value="" selected>入学年度を選択</option>
                     <option th:each="year : ${years}" th:value="${year}" th:text="${year}"></option>
@@ -61,6 +80,7 @@
                 <button type="button" onclick="submitForm()">検索</button>
             </form>
 
+
              <form id="subjectForm" class="form py-4 needs-validation h-adr" method="post" th:action="@{/point/}">
         <select id="subjectCd" name="subjectCd" class="form-select">
             <option value="" disabled selected>科目</option>
@@ -71,6 +91,7 @@
                     <option value="">回数</option>
                     <option th:each="number : ${no}" th:value="${number}" th:text="${number}"></option>
                 </select>
+
 
                 <p>科目:</p>
 
@@ -107,9 +128,13 @@
                 </div>
 
                 <button type="submit">保存</button>
+
             </form>
+
             <a href="/">学生一覧に戻る</a><br>
+            <div th:if="${studentList != null}">
         </div>
     </div>
 </body>
 </html>
+

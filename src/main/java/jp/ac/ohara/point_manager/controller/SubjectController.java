@@ -2,7 +2,6 @@ package jp.ac.ohara.point_manager.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
@@ -17,7 +16,6 @@ import io.micrometer.common.lang.NonNull;
 import jp.ac.ohara.point_manager.model.SubjectModel;
 import jp.ac.ohara.point_manager.model.TeacherModel;
 import jp.ac.ohara.point_manager.service.SubjectService;
-import jp.ac.ohara.point_manager.service.TeacherDetailsServiceImplt;
 
 
 
@@ -27,17 +25,16 @@ public class SubjectController {
 	
 	@Autowired
 	private SubjectService subjectService;
-	@Autowired
-	private TeacherDetailsServiceImplt userService;
+
 	
 	
 
-	// 成績登録ページ
+	// 科目登録ページ
 	@GetMapping("/subject/")
-	public ModelAndView add(@AuthenticationPrincipal UserDetails user, Model model1, SubjectModel subject, ModelAndView model) {
+	public ModelAndView add(@AuthenticationPrincipal TeacherModel teachermodel, Model model1, SubjectModel subject, ModelAndView model) {
 		  model.addObject("subject", subject); 
 		  model.setViewName("subject");
-		  model1.addAttribute("user2",user);
+		  model.addObject("user2",teachermodel);
 
 
 		  return model;
@@ -57,38 +54,62 @@ public class SubjectController {
 	    } catch (Exception e) {
 	        redirectAttributes.addFlashAttribute("exception", e.getMessage());
 	    }
-	    return "redirect:/";
+	    return "redirect:/subjectlist/";
 
 	  }
 	
 
-	//学生・成績・出席リスト表示・出席詳細表示
+	//科目詳細表示
 	@GetMapping("/subjectlist/")
-	public String add3(@AuthenticationPrincipal UserDetails user,Model model) {
+	public String add3(@AuthenticationPrincipal TeacherModel teachermodel,Model model) {
 	  System.out.println(subjectService.getSubjectList().toString());
 	    model.addAttribute("subjectList", subjectService.getSubjectList());
-	    model.addAttribute("user2",user);
+	    model.addAttribute("user2",teachermodel);
 
 
 	    return "subjectlist";
 	}
 
-	// 成績情報の削除
+	// 科目情報の削除
 	@PostMapping("/subject/delete/{id}")
 	public String deleteSubject(@PathVariable Long id) {
 	    subjectService.delete(id);
 	    	return "redirect:/subjectlist/";
 	}
 		
-		// 成績情報の編集ページ
+		// 科目情報の編集ページ
 	@GetMapping("/subjectlist/edit/{id}")
-	public String editSubject(@AuthenticationPrincipal UserDetails user,@PathVariable Long id, Model model) {
+	public String editSubject(@AuthenticationPrincipal TeacherModel teachermodel,@PathVariable Long id, Model model) {
 	    SubjectModel subject = subjectService.getSubjectById(id);
 	    model.addAttribute("subject", subject);
-	    model.addAttribute("user2",user);
+	    model.addAttribute("user2",teachermodel);
 
 
 	    return "edit_subject";
 
 	}
+	
+    // 科目情報の更新
+    @PostMapping("/subjectlist/update/{id}")
+    public String updateSubject(@PathVariable Long id, @Validated @ModelAttribute @NonNull SubjectModel subject, RedirectAttributes redirectAttributes,@AuthenticationPrincipal TeacherModel user) {
+        subject.setId(id);
+        try {
+        	subject.setSchoolCd(user.getSchoolCd());
+            subjectService.saveOrUpdateSubject(subject);
+            redirectAttributes.addFlashAttribute("exception", "");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("exception", e.getMessage());
+        }
+        
+
+
+        return "redirect:/subjectfini/";
+    }
+    
+	@GetMapping("/subjectfini/")
+	public String add(@AuthenticationPrincipal TeacherModel teachermodel,Model model) {
+	    model.addAttribute("user2",teachermodel);
+	    return "subjectfini";
+	}
+   
 }
