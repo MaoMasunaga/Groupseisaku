@@ -16,7 +16,6 @@ import io.micrometer.common.lang.NonNull;
 import jp.ac.ohara.point_manager.model.SubjectModel;
 import jp.ac.ohara.point_manager.model.TeacherModel;
 import jp.ac.ohara.point_manager.service.SubjectService;
-import jp.ac.ohara.point_manager.service.TeacherDetailsServiceImplt;
 
 
 
@@ -26,8 +25,7 @@ public class SubjectController {
 	
 	@Autowired
 	private SubjectService subjectService;
-	@Autowired
-	private TeacherDetailsServiceImplt userService;
+
 	
 	
 
