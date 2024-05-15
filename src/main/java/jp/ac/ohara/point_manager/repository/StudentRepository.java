@@ -29,6 +29,6 @@ public interface StudentRepository extends JpaRepository<StudentModel, Long> {
     
     List<StudentModel> findBySchoolCd(String schoolCd);
     
+    StudentModel findByNo(String no);
     
-    StudentModel findByNo(String studentNo);
 }

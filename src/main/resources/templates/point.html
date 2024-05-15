@@ -22,9 +22,7 @@
         }
     </script>
 </head>
- 
 <body>
-<
     <h1 style="background-color:rgb(128, 255, 255)">得点管理システム</h1>
     <div style="display: flex;">
         <header class="mb-auto" style="padding: 10px;">
@@ -40,17 +38,17 @@
                 </ul>
             </nav>
         </header>
-        <div style="flex-grow: 1;"> <!-- body要素を水平方向に伸ばすためにflex-growを使用 -->
+        <div style="flex-grow: 1;">
             <h2>成績管理</h2>
-            
+
             <p th:if="${param.error}">
-                既に存在している学生です。
+                <span th:text="${param.error}"></span>
             </p>
             <p th:if="${param.success}">
-                エラー
+                <span th:text="${param.success}"></span>
             </p>
-            
-            <form id="searchForm" class="form py-4 needs-validation h-adr" method="post" th:action="@{/point/}" th:object="${student}">
+
+            <form id="searchForm" class="form py-4 needs-validation h-adr" method="get" th:action="@{/point/search}">
                 <select name="entYear">
                     <option value="" selected>入学年度を選択</option>
                     <option th:each="year : ${years}" th:value="${year}" th:text="${year}"></option>
@@ -62,79 +60,56 @@
                 </select>
                 <button type="button" onclick="submitForm()">検索</button>
             </form>
-            
-             <form id="searchForm" class="form py-4 needs-validation h-adr" method="post" th:action="@{/point/}" th:object="${subject}">
-                <select id="subjectCd" name="subjectCd" class="form-select">
-                    <option value="" disabled selected>科目</option>
-                    <option th:each="subjectCd : ${subjectCd}" th:value="${subjectCd.name}" th:text="${subjectCd.name}">科目</option>
-                </select>
+
+             <form id="subjectForm" class="form py-4 needs-validation h-adr" method="post" th:action="@{/point/}">
+        <select id="subjectCd" name="subjectCd" class="form-select">
+            <option value="" disabled selected>科目</option>
+            <option th:each="subject : ${subjectList}" th:value="${subject.cd}" th:text="${subject.name}"></option>
+        </select>
 
                 <select name="no">
                     <option value="">回数</option>
-                    <option th:each="no : ${no}" th:value="${no}" th:text="${no}"></option>
+                    <option th:each="number : ${no}" th:value="${number}" th:text="${number}"></option>
                 </select>
-                
+
+                <p>科目:</p>
+
+                <div th:if="${studentList != null}">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>入学年度</th>
+                                <th>クラス番号</th>
+                                <th>学生番号</th>
+                                <th>学生名</th>
+                                <th>点数</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="student : ${studentList}">
+                                <td th:text="${student.entYear}"></td>
+                                <td th:text="${student.classNum}"></td>
+                                <td th:text="${student.no}"></td>
+                                <td th:text="${student.name}"></td>
+                                <td>
+                        <input type="hidden" name="studentNo" th:value="${student.no}">
+                        <input type="text" class="form-control" name="point">
+                        <input type="hidden" name="classNum" th:value="${student.classNum}">
+                        
+                        
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div th:unless="${studentList != null}">
+                    <p>データなし</p>
+                </div>
+
+                <button type="submit">保存</button>
             </form>
-            
-
-            <p>科目:</p>
-            
-            <div th:if="${studentList != null}">
-    <form action="/point/" method="post">
-        <table>
-            <thead>
-                <tr>
-                    <th>入学年度</th>
-                    <th>クラス番号</th>
-                    <th>学生番号</th>
-                    <th>学生名</th>
-                    <th>点数</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="student : ${studentList}">
-                    <td th:text="${student.entYear}"></td>
-                    <td th:text="${student.classNum}"></td>
-                    <td th:text="${student.no}"></td>
-                    <td th:text="${student.name}"></td>
-                    <td>
-                        <input type="text" class="form-control" th:id="'point_' + ${student.id}" th:name="'point_' + ${student.id}">
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <button type="submit">保存</button>
-    </form>
-</div>
-<div th:unless="${studentList != null}">
-    <p>データなし</p>
-</div>
-<a href="/">学生一覧に戻る</a><br>
-
-<p>=============成績登録仮完成================</p><br>
-            <form class="form py-4 needs-validation h-adr" method="post" th:action="@{/point/}" th:object="${test}">
-                <label for="studentNo" class="col-4 col-form-label text-end">学籍番号</label>
-                <input type="text" class="form-control" id="studentNo" name="studentNo"><br>
-               
-                <label for="classNum" class="col-4 col-form-label text-end">クラス番号</label>
-                <input type="text" class="form-control" id="classNum" name="classNum"><br>
-                
-                <label for="schoolCd" class="col-4 col-form-label text-end">学校コード</label>
-                <input type="text" class="form-control" id="schoolCd" name="schoolCd"><br>
-
-                <label for="subjectCd" class="col-4 col-form-label text-end">科目コード</label>
-                <input type="text" class="form-control" id="subjectCd" name="subjectCd"><br>
-                
-                <label for="no" class="col-4 col-form-label text-end">テスト回数</label>
-                <input type="text" class="form-control" id="no" name="no"><br>
-
-                <label for="point" class="col-4 col-form-label text-end">ポイント</label>
-                <input type="text" class="form-control" id="point" name="point"><br>
-
-                <button type="submit">点数登録</button>
-            </form>
-                    </div>
+            <a href="/">学生一覧に戻る</a><br>
+        </div>
     </div>
-    
 </body>
 </html>

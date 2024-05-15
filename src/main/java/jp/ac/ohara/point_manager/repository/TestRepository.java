@@ -10,7 +10,7 @@ import jp.ac.ohara.point_manager.model.TestModel;
 
 @Repository
 public interface TestRepository extends JpaRepository<TestModel, Long> {
-	List<TestModel> findBySchoolCd(Integer schoolCd);
+	List<TestModel> findBySchoolCd(String schoolCd);
 
  
 }

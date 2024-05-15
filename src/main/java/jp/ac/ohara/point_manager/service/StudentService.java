@@ -103,7 +103,14 @@ public class StudentService {
     }
 
 	
+    public StudentModel findByNo(String no) {
+        return repository.findByNo(no);
+    }
 
+	public List<StudentModel> findByEntYearAndClassNum(String entYear, String classNum) {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
+	}
 
    
 

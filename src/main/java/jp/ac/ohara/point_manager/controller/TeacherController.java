@@ -41,7 +41,7 @@ public class TeacherController {
     public String registerTeacher(@Validated @ModelAttribute @NonNull TeacherModel teacher, RedirectAttributes redirectAttributes) {
         try {
             // パスワードをハッシュ化してセット
-        	teacher.setSchoolCd("AAA");
+        	teacher.setSchoolCd("111");
             String hashedPassword = passwordEncoder.encode(teacher.getPassword());
             teacher.setPassword(hashedPassword);
 

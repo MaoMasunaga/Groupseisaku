@@ -37,4 +37,6 @@ public class StudentModel implements Serializable {
     
     @Column(length = 3, nullable = true, name = "school_cd")
     private String schoolCd;
+    
+    
 }

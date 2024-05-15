@@ -22,8 +22,8 @@ public class TestModel {
     @Column(length = 3, nullable = false, name = "subject_cd")
     private String subjectCd;
 
-    @Column(length = 10, nullable = false, name = "school_cd")
-    private Integer schoolCd;
+    @Column(length = 3, nullable = false, name = "school_cd")
+    private String schoolCd;
 
     @Column(length = 10, nullable = false, name = "no")
     private Integer no;

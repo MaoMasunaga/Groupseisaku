@@ -44,7 +44,11 @@ public class TestService {
         // schoolCdに基づいて生徒のデータをデータベースから取得するロジックを実装する
         return testRepository.findAll();
     }
-   
+    
+    public void saveTest(TestModel testModel) {
+        testRepository.save(testModel);
+    }
+
     	
     }
             
